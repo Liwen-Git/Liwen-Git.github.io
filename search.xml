@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[provide 和 inject]]></title>
+    <url>%2F2019%2F09%2F18%2Fprovide-and-inject%2F</url>
+    <content type="text"><![CDATA[官网解释：provider/inject provider/inject：简单的来说就是在父组件中通过provider来提供变量，然后在子组件中通过inject来注入变量。 需要注意的是这里不论子组件有多深，只要调用了inject那么就可以注入provider中的数据。而不是局限于只能从当前父组件的prop属性来获取数据。 示例： first：定义一个parent component, 在这里我们在父组件中provide for这个变量。 12345678910111213141516171819&lt;template&gt; &lt;div&gt; &lt;childOne&gt;&lt;/childOne&gt; &lt;/div&gt;&lt;/template&gt;&lt;script&gt; import childOne from &apos;../components/test/ChildOne&apos; export default &#123; name: &quot;Parent&quot;, provide() &#123; return &#123; for: &quot;demo&quot; &#125; &#125;, components:&#123; childOne &#125; &#125; second 定义一个子组件 12345678910111213141516171819202122&lt;template&gt; &lt;div&gt; &#123;&#123;demo&#125;&#125; &lt;childtwo&gt;&lt;/childtwo&gt; &lt;/div&gt;&lt;/template&gt;&lt;script&gt; import childtwo from &apos;./ChildTwo&apos; export default &#123; name: &quot;childOne&quot;, inject: [&apos;for&apos;], data() &#123; return &#123; demo: this.for &#125; &#125;, components: &#123; childtwo &#125; &#125;&lt;/script&gt; third 定义另一个子组件 1234567891011121314151617&lt;template&gt; &lt;div&gt; &#123;&#123;demo&#125;&#125; &lt;/div&gt;&lt;/template&gt;&lt;script&gt; export default &#123; name: &quot;&quot;, inject: [&apos;for&apos;], data() &#123; return &#123; demo: this.for &#125; &#125; &#125;&lt;/script&gt; 在2个子组件中我们使用jnject注入了provide提供的变量for，并将它提供给了data属性。 运行结果是 demo demo 从上面这个例子可以看出，只要在父组件中调用了，那么在这个父组件生效的生命周期内，所有的子组件都可以调用inject来注入父组件中的值。]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[keep-alive的作用]]></title>
     <url>%2F2019%2F09%2F18%2Fkeep-alive%2F</url>
     <content type="text"><![CDATA[问题描述在vue项目中,难免会有列表页面或者搜索结果列表页面,点击某个结果之后,返回回来时,如果不对结果页面进行缓存,那么返回列表页面的时候会回到初始状态,但是我们想要的结果是返回时这个页面还是之前搜索的结果列表,这时候就需要用到vue的keep-alive技术了. keep-alive 简介keep-alive 是 Vue 内置的一个组件，可以使被包含的组件保留状态，或避免重新渲染。 用法也很简单： 12345&lt;keep-alive&gt; &lt;component&gt; &lt;!-- 该组件将被缓存！ --&gt; &lt;/component&gt;&lt;/keep-alive&gt; props include - 字符串或正则表达，只有匹配的组件会被缓存 exclude - 字符串或正则表达式，任何匹配的组件都不会被缓存 1234567// 组件 aexport default &#123; name: &apos;a&apos;, data () &#123; return &#123;&#125; &#125;&#125; 12345&lt;keep-alive include=&quot;a&quot;&gt; &lt;component&gt; &lt;!-- name 为 a 的组件将被缓存！ --&gt; &lt;/component&gt;&lt;/keep-alive&gt;可以保留它的状态或避免重新渲染 12345&lt;keep-alive exclude=&quot;a&quot;&gt; &lt;component&gt; &lt;!-- 除了 name 为 a 的组件都将被缓存！ --&gt; &lt;/component&gt;&lt;/keep-alive&gt;可以保留它的状态或避免重新渲染 配合vue-router共同使用但实际项目中,常需要配合vue-router共同使用. router-view 也是一个组件，如果直接被包在 keep-alive 里面，所有路径匹配到的视图组件都会被缓存： 12345&lt;keep-alive&gt; &lt;router-view&gt; &lt;!-- 所有路径匹配到的视图组件都会被缓存！ --&gt; &lt;/router-view&gt;&lt;/keep-alive&gt; 如果只想 router-view 里面某个组件被缓存，怎么办？ 增加 router.meta 属性 123456789101112131415161718// routes 配置export default [ &#123; path: &apos;/&apos;, name: &apos;home&apos;, component: Home, meta: &#123; keepAlive: true // 需要被缓存 &#125; &#125;, &#123; path: &apos;/:id&apos;, name: &apos;edit&apos;, component: Edit, meta: &#123; keepAlive: false // 不需要被缓存 &#125; &#125;] 12345678&lt;keep-alive&gt; &lt;router-view v-if=&quot;$route.meta.keepAlive&quot;&gt; &lt;!-- 这里是会被缓存的视图组件，比如 Home！ --&gt; &lt;/router-view&gt;&lt;/keep-alive&gt;&lt;router-view v-if=&quot;!$route.meta.keepAlive&quot;&gt; &lt;!-- 这里是不被缓存的视图组件，比如 Edit！ --&gt;&lt;/router-view&gt;]]></content>
