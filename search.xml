@@ -14,7 +14,7 @@
   <entry>
     <title><![CDATA[composer镜像]]></title>
     <url>%2F2019%2F09%2F19%2Fcomposer-images%2F</url>
-    <content type="text"><![CDATA[启用镜像服务的方式有两种：系统全局配置 ：即将配置信息添加到composer的全局配置文件config.json中。单个项目配置 ：将配置信息添加到某个项目的composer.json文件中 修改composer 的全局配置文件打开命令行（windows用户）或控制台（Linux、Mac用户）并执行如下命令： 1composer config -g repo.packagist composer https://packagist.phpcomposer.com 修改当前项目的composer.json配置文件：进入项目根目录（也就是composer.json文件所在目录），执行如下命令： 1composer config repo.packagist composer https://packagist.phpcomposer.com 上述命令将会在当前项目中的composer.json文件的末尾自动添加镜像的配置信息（你自己也可以手动添加）： 123456&quot;repositories&quot;: &#123; &quot;packagist&quot;: &#123; &quot;type&quot;: &quot;composer&quot;, &quot;url&quot; : &quot;https://packagist.phpcomposer.com&quot; &#125;&#125; 查看composer镜像地址1composer config -gl]]></content>
+    <content type="text"><![CDATA[启用镜像服务的方式有两种：系统全局配置 ：即将配置信息添加到composer的全局配置文件config.json中。单个项目配置 ：将配置信息添加到某个项目的composer.json文件中 修改composer 的全局配置文件打开命令行（windows用户）或控制台（Linux、Mac用户）并执行如下命令： 1234--- phpcomposer ---composer config -g repo.packagist composer https://packagist.phpcomposer.com--- aliyun 推荐 ---composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/ 修改当前项目的composer.json配置文件：进入项目根目录（也就是composer.json文件所在目录），执行如下命令： 1composer config repo.packagist composer https://packagist.phpcomposer.com 上述命令将会在当前项目中的composer.json文件的末尾自动添加镜像的配置信息（你自己也可以手动添加）： 123456&quot;repositories&quot;: &#123; &quot;packagist&quot;: &#123; &quot;type&quot;: &quot;composer&quot;, &quot;url&quot; : &quot;https://packagist.phpcomposer.com&quot; &#125;&#125; 查看composer镜像地址 1composer config -gl 取消配置 1composer config -g --unset repos.packagist]]></content>
       <categories>
         <category>PHP</category>
       </categories>
