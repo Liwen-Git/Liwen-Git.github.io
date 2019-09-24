@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="李子园">
 <meta property="og:description" content="安装并配置必要的依赖关系123sudo yum install -y curl policycoreutils-python openssh-server croniesudo lokkit -s http -s ssh  安装Postfix以发送通知电子邮件 123sudo yum install postfixsudo service postfix startsudo chkconfig p">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-24T03:27:13.487Z">
+<meta property="og:updated_time" content="2019-09-24T03:43:54.066Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gitLab-ce搭建">
 <meta name="twitter:description" content="安装并配置必要的依赖关系123sudo yum install -y curl policycoreutils-python openssh-server croniesudo lokkit -s http -s ssh  安装Postfix以发送通知电子邮件 123sudo yum install postfixsudo service postfix startsudo chkconfig p">
@@ -394,7 +394,7 @@
                 
               
 
-              <time title="创建时间：2019-09-24 11:22:02 / 修改时间：11:27:13" itemprop="dateCreated datePublished" datetime="2019-09-24T11:22:02+08:00">2019-09-24</time>
+              <time title="创建时间：2019-09-24 11:22:02 / 修改时间：11:43:54" itemprop="dateCreated datePublished" datetime="2019-09-24T11:22:02+08:00">2019-09-24</time>
             </span>
           
 
@@ -450,10 +450,10 @@
 <p>这样就可以访问你的gitLab了。</p>
 <h5 id="修改nginx端口（使用gitLab内置nginx）"><a href="#修改nginx端口（使用gitLab内置nginx）" class="headerlink" title="修改nginx端口（使用gitLab内置nginx）"></a>修改nginx端口（使用gitLab内置nginx）</h5><ol>
 <li><p>修改nginx端口</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/gitlab/gitlab.rb</span><br><span class="line"></span><br><span class="line">nginx[&apos;listen_port&apos;] = 82               #默认值即80端口 nginx[&apos;listen_port&apos;] = nil</span><br><span class="line"></span><br><span class="line">vim /var/opt/gitlab/nginx/conf/gitlab-http.conf</span><br><span class="line"></span><br><span class="line">listen *:82;                    #默认值listen *:80;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/gitlab/gitlab.rb</span><br><span class="line"></span><br><span class="line">nginx[&apos;listen_port&apos;] = 82    #默认值即80端口 nginx[&apos;listen_port&apos;] = nil</span><br><span class="line"></span><br><span class="line">vim /var/opt/gitlab/nginx/conf/gitlab-http.conf</span><br><span class="line"></span><br><span class="line">listen *:82;    #默认值listen *:80;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>修改unicorn端口(可以不修改)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/gitlab/gitlab.rb</span><br><span class="line"></span><br><span class="line">unicorn[&apos;port&apos;] = 8082                  #原值unicorn[&apos;port&apos;] = 8080</span><br><span class="line"></span><br><span class="line">vim /var/opt/gitlab/gitlab-rails/etc/unicorn.rb</span><br><span class="line"></span><br><span class="line">listen &quot;127.0.0.1:8082&quot;, :tcp_nopush =&gt; true                        #原值listen &quot;127.0.0.1:8080&quot;, :tcp_nopush =&gt; true</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/gitlab/gitlab.rb</span><br><span class="line"></span><br><span class="line">unicorn[&apos;port&apos;] = 8082   #原值unicorn[&apos;port&apos;] = 8080</span><br><span class="line"></span><br><span class="line">vim /var/opt/gitlab/gitlab-rails/etc/unicorn.rb</span><br><span class="line"></span><br><span class="line">listen &quot;127.0.0.1:8082&quot;, :tcp_nopush =&gt; true  #原值listen &quot;127.0.0.1:8080&quot;, :tcp_nopush =&gt; true</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>保存配置并重启</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo gitlab-ctl reconfigure</span><br><span class="line">sudo gitlab-ctl restart</span><br><span class="line">sudo gitlab-ctl status</span><br></pre></td></tr></table></figure>
