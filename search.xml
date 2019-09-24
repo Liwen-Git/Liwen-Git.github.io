@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Homebrew切换镜像源]]></title>
+    <url>%2F2019%2F09%2F24%2Fhomebrew-mirrors%2F</url>
+    <content type="text"><![CDATA[切换中科大镜像源： 替换brew.git123cd /usr/local/Homebrewgit remote set-url origin https://mirrors.ustc.edu.cn/brew.git 切换回官方源： https://github.com/Homebrew/brew 替换homebrew-core.git12345cd /usr/local/Homebrew/Library/Taps/homebrew/homebrew-coregit remote set-url origin https://mirrors.ustc.edu.cn/homebrew-core.gitbrew update 切换官方源： https://github.com/Homebrew/homebrew-core 替换Homebrew Bottles源123echo &apos;export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles&apos; &gt;&gt; ~/.bash_profilesource ~/.bash_profile 切换回官方： 删除~/.bash_profile中的HOMEBREW_BOTTLE_DOMAIN源即可]]></content>
+      <categories>
+        <category>mac</category>
+      </categories>
+      <tags>
+        <tag>homebrew</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Laravel-ide-helper]]></title>
+    <url>%2F2019%2F09%2F24%2Flaravel-ide-helper%2F</url>
+    <content type="text"><![CDATA[安装安装命令： 12# 如果只想在开发环境安装请加上 --devcomposer require --dev barryvdh/laravel-ide-helper 在 「config/app.php」的 「providers」数组中加入 1Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class, 如果你的 Laravel 版本小于 5.5 的话，请注册服务提供者，否则请忽略 如果你只在开发环境中安装「larave-ide-helper」，那么可以在「app/Providers/AppServiceProvider.php」的「register」方法中写入下面代码： 1234567public function register()&#123; if ($this-&gt;app-&gt;environment() !== &apos;production&apos;) &#123; $this-&gt;app-&gt;register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class); &#125; // ...&#125; 导出配置文件,即：config/ide-helper.php（如果默认配置就满足需求了，也可以忽略这一步） 1php artisan vendor:publish --provider=&quot;Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider&quot; --tag=config 好了，接下去可以愉快的使用了 自动为 Laravel 的 Facades 生成注释在命令行下运行 1php artisan ide-helper:generate 注: 如果存在文件 「bootstrap/compiled.php」 需要先删除， 可以在生成文当前运行 php artisan clear-compiled。 自动为模型生成注释 多个模型：直接 php artisan ide-helper:models，当然也可以 php artisan ide-helper:models -W 单个模型：这个不能按照 github 上的 readme 来，坑爹。必须指明具体的类全名：php artisan ide-helper:models &quot;App\Http\Models\User&quot;。 为所有模型生成注释 php artisan ide-helper:models, 这时会出现询问： 1Do you want to overwrite the existing model files? Choose no to write to _ide_helper_models.php instead? (Yes/No): (yes/no) [no]: 输入 yes 则会直接在模型文件中写入注释，否则会生成「_ide_helper_models.php」文件。建议选择 yes，这样在跟踪文件的时候不会跳转到「_ide_helper_models.php」文件，不过这么做最好对模型文件做个备份，至少在生成注释之前用 git 控制一下版本，以防万一。 提示： 为模型生成字段信息必须在数据库中存在相应的数据表，不要生成 migration 还没运行 migrate 的时候就生成注释，这样是得不到字段信息的。 自动为链式操作注释这是什么意思呢？举个例子，在 migration 文件中经常可以看见这样的代码： 1$table-&gt;string(&apos;email&apos;)-&gt;unique(); 这时候就算调用过了 php artisan ide-helper:generate，在调用像 -&gt;unique() 这样的链式操作的时候也无法实现代码提示，这时候需要将配置文件「如果导出的话」&#39;include_fluent&#39; =&gt; false 修改为 &#39;include_fluent&#39; =&gt; true，重新运行 php artisan ide-helper:generate。试试效果吧！ 生成 .phpStorm.meta.php可以生成一个PhpStorm meta 文件去支持工厂模式. 对于 Laravel, 这意味着我们可以让 PhpStorm 理解我们从 IoC 容器中解决了什么类型的对象。例如：事件将返回一个「Illuminate\Events\Dispatcher」对象，利用 meta 文件您可以调用 app(‘events’) 并且它将自动完成 Dispatcher 的方法。 12345678app(&apos;events&apos;)-&gt;fire();\App::make(&apos;events&apos;)-&gt;fire();/** @var \Illuminate\Foundation\Application $app */$app-&gt;make(&apos;events&apos;)-&gt;fire();// When the key is not found, it uses the argument as class nameapp(&apos;App\SomeClass&apos;); 提示：您可能需要重启 Phpstorm 使 .phpStorm.meta.php 文件生效。 自动运行 generate想在依赖包更新是自动更新注释，可以在 composer.json 文件中做如下配置： 1234567&quot;scripts&quot;:&#123; &quot;post-update-cmd&quot;: [ &quot;Illuminate\\Foundation\\ComposerScripts::postUpdate&quot;, &quot;php artisan ide-helper:generate&quot;, &quot;php artisan ide-helper:meta&quot; ]&#125; 提示：如果只在 dev 环境下部署 ide helper 还是不要这么做了，防止在生产环境中报错导致不必要的麻烦。]]></content>
+      <categories>
+        <category>PHP</category>
+      </categories>
+      <tags>
+        <tag>laravel</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[TortoiseGit 和 Git 配置使用同一私钥]]></title>
     <url>%2F2019%2F09%2F24%2Ftortoisegit-key%2F</url>
     <content type="text"><![CDATA[tortoisegit 和 git 私钥格式 tortoisegit 默认使用putty格式的私钥（id_rsa.ppk）： git 默认使用openssh格式的私钥 (id_ras)： 首先通过ssh-keygen命令生产通用的id_ras.pub公钥 和 id_rsa的git私钥1$ ssh-keygen -t rsa -C &quot;youremail@example.com&quot; 然后可以在用户主目录里找到.ssh目录，里面有 id_rsa 和 id_rsa.pub 两个文件，这两个就是 SSH Key 的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。 使用puttyGen将git的openssh格式秘钥转化为putty格式 运行PuTTYGen，在Conversions菜单中点击Import key，选择ssh-keygen生成的私钥文件所在位置，比如id_rsa文件。 点击Save private key按钮，将其保存为.ppk文件。]]></content>
@@ -15,6 +37,9 @@
     <title><![CDATA[gitLab-ce搭建]]></title>
     <url>%2F2019%2F09%2F24%2Fgitlab-ce%2F</url>
     <content type="text"><![CDATA[安装并配置必要的依赖关系123sudo yum install -y curl policycoreutils-python openssh-server croniesudo lokkit -s http -s ssh 安装Postfix以发送通知电子邮件 123sudo yum install postfixsudo service postfix startsudo chkconfig postfix on 添加gitLab仓库到yum源，并安装123curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh | sudo bashsudo EXTERNAL_URL=&quot;http://gitlab.example.com&quot; yum -y install gitlab-ce EXTERNAL_URL是设置用什么域名访问你的gitlab，此时也可以直接yum install gitlab-ce。安装完成后再修改配置文件/etc/gitlab/gitlab.rb 运行配置命令1sudo gitlab-ctl reconfigure 这样就可以访问你的gitLab了。 修改nginx端口（使用gitLab内置nginx） 修改nginx端口 1234567vim /etc/gitlab/gitlab.rbnginx[&apos;listen_port&apos;] = 82 #默认值即80端口 nginx[&apos;listen_port&apos;] = nilvim /var/opt/gitlab/nginx/conf/gitlab-http.conflisten *:82; #默认值listen *:80; 修改unicorn端口(可以不修改) 1234567vim /etc/gitlab/gitlab.rbunicorn[&apos;port&apos;] = 8082 #原值unicorn[&apos;port&apos;] = 8080vim /var/opt/gitlab/gitlab-rails/etc/unicorn.rblisten &quot;127.0.0.1:8082&quot;, :tcp_nopush =&gt; true #原值listen &quot;127.0.0.1:8080&quot;, :tcp_nopush =&gt; true 保存配置并重启 123sudo gitlab-ctl reconfiguresudo gitlab-ctl restartsudo gitlab-ctl status 访问 ip:82 成功。 gitLab服务命令 说明 常用命令 重新加载配置， 每次修改/etc/gitlab/gitlab.rb文件之后执行 sudo gitlab-ctl reconfigure 启动 sudo gitlab-ctl start 停止 sudo gitlab-ctl stop 重启 sudo gitlab-ctl restart 查看状态 sudo gitlab-ctl status 查看所有日志 sudo gitlab-ctl tail 查看 nginx 访问日志 sudo gitlab-ctl tail nginx/gitlab_acces.log 查看 postgresql 日志 sudo gitlab-ctl tail postgresql 检查gitLab状态 gitlab-rake gitlab:check 检查环境和配置是否正确 gitlab-rake gitlab:env:info 清除缓存 gitlab-rake cache:clear 相关文件位置 内容 位置 日志 /var/log/gitlab gitlab_url /opt/gitlab/embedded/service/gitlab-shell/config.yml nginx配置 /var/opt/gitlab/nginx/conf/gitlab-http.conf gitlab主配置文件 /etc/gitlab/gitlab.rb ssh路径url配置文件 /opt/gitlab/embedded/service/gitlab-rails/config/gitlab.yml gitLab修改ssh默认端口 vim /etc/gitlab/gitlab.rb找到：gitlab_rails[‘gitlab_shell_ssh_port’] = 22 修改为：【你服务器ssh登录的端口】 重新编译：gitlab-ctl stopgitlab-ctl reconfiguregitlab-ctl start 疑难杂症 问题：访问报500错误原因：运行gitlab-rake gitlab:check，发现gitlab-shell self-check failed；再运行sudo gitlab-ctl restart，发现redis出现timeout；解决：找不到原因，暂时方法是 ps -ef | grep runsv 找到redis 的父级进程，kill -9 xxxx 全部杀掉后会自动拉起。]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
       <tags>
         <tag>git</tag>
       </tags>
