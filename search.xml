@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>docker内部访问宿主机</title>
+      <link href="/2020/03/12/docker-commit-out-host/"/>
+      <url>/2020/03/12/docker-commit-out-host/</url>
+      
+        <content type="html"><![CDATA[<p>有时候需要在docker容器里访问宿主机提供的某些服务。如：容器里的应用需要访问宿主机的MySQL服务。</p><h5 id="方法介绍"><a href="#方法介绍" class="headerlink" title="方法介绍"></a>方法介绍</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Use your internal IP address or connect to the special DNS name host.docker.internal which will resolve to the internal IP address used by the host.</span><br></pre></td></tr></table></figure><ul><li><p>方法1：<br>宿主机执行<code>ifconfig</code>，找到docker0网卡对应的IP，可以使用这个IP来访问宿主机。</p></li><li><p>方法2：<br>docker 18.03加入了一个feature，在容器中可以通过 <code>host.docker.internal</code>来访问主机。</p></li></ul><a id="more"></a><h5 id="Docker-For-Mac没有docker0网桥的问题"><a href="#Docker-For-Mac没有docker0网桥的问题" class="headerlink" title="Docker For Mac没有docker0网桥的问题"></a>Docker For Mac没有docker0网桥的问题</h5><p>在使用 Docker 时，要注意平台之间实现的差异性，如 Docker For Mac 的实现和标准 Docker 规范有区别，Docker For Mac 的 <code>Docker Daemon</code> 是运行于<code>虚拟机 (xhyve)</code> 中的，而不是像 Linux 上那样作为进程运行于宿主机，因此 Docker For Mac 没有 docker0 网桥，不能实现 host 网络模式，host 模式会使 <code>Container</code> 复用 <code>Daemon</code> 的网络栈 (在 <code>xhyve 虚拟机</code>中)，而不是与 Host &gt;主机网络栈，这样虽然其它容器仍然可通过 xhyve 网络栈进行交互，但却不是用的 Host 上的端口 (在 Host 上无法访问)。<code>bridge 网络模式 -p 参数</code>不受此影响，它能正常打开 Host 上的端口并映射到 <code>Container</code> 的对应 <code>Port</code>。文档在这一点上并没有充分说&gt;明，容易踩坑。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Docker </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> network </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>CGI、FastCGI和PHP-FPM</title>
       <link href="/2020/01/19/php-base-knowledge/"/>
       <url>/2020/01/19/php-base-knowledge/</url>
@@ -20,9 +45,9 @@
       
         <tags>
             
-            <tag> php-fpm </tag>
-            
             <tag> fast-cgi </tag>
+            
+            <tag> php-fpm </tag>
             
         </tags>
       

@@ -95,18 +95,18 @@
 
 
 
-  <meta name="description" content="1. 安装docker移除旧版本： 12345678910$ sudo yum remove docker \                  docker-client \                  docker-client-latest \                  docker-common \                  docker-latest \">
-<meta name="keywords" content="php,nginx">
+  <meta name="description" content="有时候需要在docker容器里访问宿主机提供的某些服务。如：容器里的应用需要访问宿主机的MySQL服务。 方法介绍1Use your internal IP address or connect to the special DNS name host.docker.internal which will resolve to the internal IP address used by the">
+<meta name="keywords" content="network">
 <meta property="og:type" content="article">
-<meta property="og:title" content="laradock 搭建php环境">
-<meta property="og:url" content="https://liwengo.top/2019/12/24/docker-php-env/index.html">
+<meta property="og:title" content="docker内部访问宿主机">
+<meta property="og:url" content="https://liwengo.top/2020/03/12/docker-commit-out-host/index.html">
 <meta property="og:site_name" content="李子园">
-<meta property="og:description" content="1. 安装docker移除旧版本： 12345678910$ sudo yum remove docker \                  docker-client \                  docker-client-latest \                  docker-common \                  docker-latest \">
+<meta property="og:description" content="有时候需要在docker容器里访问宿主机提供的某些服务。如：容器里的应用需要访问宿主机的MySQL服务。 方法介绍1Use your internal IP address or connect to the special DNS name host.docker.internal which will resolve to the internal IP address used by the">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-01-19T10:10:44.783Z">
+<meta property="og:updated_time" content="2020-03-12T08:00:55.335Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="laradock 搭建php环境">
-<meta name="twitter:description" content="1. 安装docker移除旧版本： 12345678910$ sudo yum remove docker \                  docker-client \                  docker-client-latest \                  docker-common \                  docker-latest \">
+<meta name="twitter:title" content="docker内部访问宿主机">
+<meta name="twitter:description" content="有时候需要在docker容器里访问宿主机提供的某些服务。如：容器里的应用需要访问宿主机的MySQL服务。 方法介绍1Use your internal IP address or connect to the special DNS name host.docker.internal which will resolve to the internal IP address used by the">
 
 
 
@@ -114,7 +114,7 @@
 
   
   
-  <link rel="canonical" href="https://liwengo.top/2019/12/24/docker-php-env/">
+  <link rel="canonical" href="https://liwengo.top/2020/03/12/docker-commit-out-host/">
 
 
 
@@ -124,7 +124,7 @@
   };
 </script>
 
-  <title>laradock 搭建php环境 | 李子园</title>
+  <title>docker内部访问宿主机 | 李子园</title>
   
 
 
@@ -352,7 +352,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liwengo.top/2019/12/24/docker-php-env/">
+    <link itemprop="mainEntityOfPage" href="https://liwengo.top/2020/03/12/docker-commit-out-host/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="多乐">
@@ -369,7 +369,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">laradock 搭建php环境
+          <h1 class="post-title" itemprop="name headline">docker内部访问宿主机
 
               
             
@@ -395,23 +395,13 @@
                 
               
 
-              <time title="创建时间：2019-12-24 10:53:42" itemprop="dateCreated datePublished" datetime="2019-12-24T10:53:42+08:00">2019-12-24</time>
+              <time title="创建时间：2020-03-12 15:55:55 / 修改时间：16:00:55" itemprop="dateCreated datePublished" datetime="2020-03-12T15:55:55+08:00">2020-03-12</time>
             </span>
           
 
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-01-19 18:10:44" itemprop="dateModified" datetime="2020-01-19T18:10:44+08:00">2020-01-19</time>
-              </span>
             
           
 
@@ -462,78 +452,18 @@
       
 
       
-        <h5 id="1-安装docker"><a href="#1-安装docker" class="headerlink" title="1. 安装docker"></a>1. 安装docker</h5><p>移除旧版本：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum remove docker \</span><br><span class="line">                  docker-client \</span><br><span class="line">                  docker-client-latest \</span><br><span class="line">                  docker-common \</span><br><span class="line">                  docker-latest \</span><br><span class="line">                  docker-latest-logrotate \</span><br><span class="line">                  docker-logrotate \</span><br><span class="line">                  docker-selinux \</span><br><span class="line">                  docker-engine-selinux \</span><br><span class="line">                  docker-engine</span><br></pre></td></tr></table></figure>
+        <p>有时候需要在docker容器里访问宿主机提供的某些服务。如：容器里的应用需要访问宿主机的MySQL服务。</p>
+<h5 id="方法介绍"><a href="#方法介绍" class="headerlink" title="方法介绍"></a>方法介绍</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Use your internal IP address or connect to the special DNS name host.docker.internal which will resolve to the internal IP address used by the host.</span><br></pre></td></tr></table></figure>
 
-<a id="more"></a>
-<p>安装必要的系统工具：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install -y yum-utils device-mapper-persistent-data lvm2</span><br></pre></td></tr></table></figure>
-
-<p>添加软件源信息：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
-
-<p>更新 yum 缓存：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum makecache fast</span><br></pre></td></tr></table></figure>
-
-<p>安装 Docker-ce：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum -y install docker-ce</span><br></pre></td></tr></table></figure>
-
-<p>启动 Docker 后台服务：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start docker</span><br></pre></td></tr></table></figure>
-
-<p>安装docker-compose：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose</span><br><span class="line">chmod +x /usr/local/bin/docker-compose</span><br><span class="line"></span><br><span class="line">也可以直接去官网下载相应版本</span><br><span class="line">https://github.com/docker/compose/releases</span><br><span class="line">然后重命名并修改权限</span><br></pre></td></tr></table></figure>
-
-<h5 id="2-部署php环境"><a href="#2-部署php环境" class="headerlink" title="2. 部署php环境"></a>2. 部署php环境</h5><ol>
-<li>克隆laradock<br>laradock 官方文档：<a href="http://laradock.io/" target="_blank" rel="noopener">http://laradock.io/</a><br>laradock github：<a href="https://github.com/laradock/laradock" target="_blank" rel="noopener">https://github.com/laradock/laradock</a></li>
-</ol>
-<p>Already have a PHP project: 在项目里</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/Laradock/laradock.git</span><br><span class="line">进入laradock:</span><br><span class="line">cp env-example .env</span><br></pre></td></tr></table></figure>
-
-<p>Don’t have a PHP project yet: 和项目同级目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/laradock/laradock.git</span><br><span class="line">进入laradock：</span><br><span class="line">cp env-example .env</span><br><span class="line">修改为项目文件名称：</span><br><span class="line">APP_CODE_PATH_HOST=../project-z/</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>直接用 docker-compose 运行需要启用的服务：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d nginx mysql php-fpm</span><br></pre></td></tr></table></figure>
-
+<ul>
+<li><p>方法1：<br>宿主机执行<code>ifconfig</code>，找到docker0网卡对应的IP，可以使用这个IP来访问宿主机。</p>
 </li>
-</ol>
-<h5 id="3-laravel-配置文件"><a href="#3-laravel-配置文件" class="headerlink" title="3. laravel 配置文件"></a>3. laravel 配置文件</h5><p>Laravel 配置文件需要注意的问题是，在 .env 文件中，mysql 和 redis 的地址需填写成这样，而不是 ip 地址形式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">DB_CONNECTION=mysql </span><br><span class="line">DB_HOST=mysql </span><br><span class="line">DB_PORT=3306 </span><br><span class="line">DB_DATABASE=xxxx</span><br><span class="line">DB_USERNAME=root </span><br><span class="line">DB_PASSWORD=root </span><br><span class="line"></span><br><span class="line">REDIS_HOST=redis </span><br><span class="line">REDIS_PASSWORD=null </span><br><span class="line">REDIS_PORT=6379</span><br></pre></td></tr></table></figure>
+<li><p>方法2：<br>docker 18.03加入了一个feature，在容器中可以通过 <code>host.docker.internal</code>来访问主机。</p>
+</li>
+</ul>
+<a id="more"></a>
 
-<h5 id="4-nginx配置"><a href="#4-nginx配置" class="headerlink" title="4. nginx配置"></a>4. nginx配置</h5><p>在laradock文件夹，nginx/sites/中配置*.conf文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line"></span><br><span class="line">    listen 80 default_server;</span><br><span class="line">    listen [::]:80 default_server ipv6only=on;</span><br><span class="line"></span><br><span class="line">    # For https</span><br><span class="line">    # listen 443 ssl default_server;</span><br><span class="line">    # listen [::]:443 ssl default_server ipv6only=on;</span><br><span class="line">    # ssl_certificate /etc/nginx/ssl/default.crt;</span><br><span class="line">    # ssl_certificate_key /etc/nginx/ssl/default.key;</span><br><span class="line"></span><br><span class="line">    server_name xxxxx.com www.xxxxx.com;</span><br><span class="line">    root /var/www/public;                   ### 注：root为容器内的路径</span><br><span class="line">    index index.php index.html index.htm;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">         try_files $uri $uri/ /index.php$is_args$args;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ \.php$ &#123;</span><br><span class="line">        try_files $uri /index.php =404;</span><br><span class="line">        fastcgi_pass php-upstream;</span><br><span class="line">        fastcgi_index index.php;</span><br><span class="line">        fastcgi_buffers 16 16k;</span><br><span class="line">        fastcgi_buffer_size 32k;</span><br><span class="line">        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</span><br><span class="line">        #fixes timeouts</span><br><span class="line">        fastcgi_read_timeout 600;</span><br><span class="line">        include fastcgi_params;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ /\.ht &#123;</span><br><span class="line">        deny all;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location /.well-known/acme-challenge/ &#123;</span><br><span class="line">        root /var/www/letsencrypt/;</span><br><span class="line">        log_not_found off;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>重启nginx操作：<br>在laradock文件夹内</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker-compose restart nginx</span><br><span class="line">或者：</span><br><span class="line">docker-compose stop nginx</span><br><span class="line">docker-compose up -d nginx</span><br></pre></td></tr></table></figure>
-
-<h5 id="5-执行composer"><a href="#5-执行composer" class="headerlink" title="5. 执行composer"></a>5. 执行composer</h5><p>执行 composer 等操作，需要进入到 workspace 容器中进行，使用命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose exec workspace bash</span><br></pre></td></tr></table></figure>
-
-<p>进入到 workspace 容器，就可以进行 compose 命令等操作了。<br>具体使用上的问题请参加 laradock 官方文档，上面都有说明。</p>
-<h5 id="6-MySQL8修改验证方式"><a href="#6-MySQL8修改验证方式" class="headerlink" title="6. MySQL8修改验证方式"></a>6. MySQL8修改验证方式</h5><p>mysql 8.0 将密码验证方式由以前的 mysql_native_password 改为了 caching_sha2_password 。可以进入 mysql 容器 bash，登录 mysql ，将验证方式修改成原来的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#在laradock文件夹中执行：</span><br><span class="line">docker-compose exec mysql bash</span><br><span class="line"></span><br><span class="line">mysql -uroot -p</span><br><span class="line">mysql&gt; grant all PRIVILEGES on *.* to root@&apos;%&apos; WITH GRANT OPTION;</span><br><span class="line">mysql&gt; ALTER user &apos;root&apos;@&apos;%&apos; IDENTIFIED WITH mysql_native_password BY &apos;root&apos;; // 设置root远程登录</span><br><span class="line">mysql&gt; ALTER user &apos;root&apos;@&apos;localhost&apos; IDENTIFIED WITH mysql_native_password BY &apos;root&apos;; // 设置root本地登录</span><br><span class="line">mysql&gt; FLUSH PRIVILEGES;</span><br><span class="line">mysql&gt; exit;</span><br></pre></td></tr></table></figure>
-
-<p>现在就可以用 root  登录了。为了使新建用户的验证方式默认为 mysql_native_password ，可以修改 my.cnf 文件，在 [mysqld] 部分中添加：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">default_authentication_plugin = mysql_native_password</span><br></pre></td></tr></table></figure>
-
-<h5 id="7-laradock-默认装的是-mysql-最新版本-mysql8-，也可以更换成低版本的-mysql"><a href="#7-laradock-默认装的是-mysql-最新版本-mysql8-，也可以更换成低版本的-mysql" class="headerlink" title="7. laradock 默认装的是 mysql 最新版本(mysql8)，也可以更换成低版本的 mysql"></a>7. laradock 默认装的是 mysql 最新版本(mysql8)，也可以更换成低版本的 mysql</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># 修改 .env 文件</span><br><span class="line">MYSQL_VERSION=5.7 # 默认为 latest</span><br><span class="line"></span><br><span class="line">#停止mysql容器</span><br><span class="line">docker-compose stop mysql</span><br><span class="line"></span><br><span class="line"># 删除旧数据库数据</span><br><span class="line">rm -rf ~/.laradock/data/mysql</span><br><span class="line"></span><br><span class="line"># 重新构建新 mysql</span><br><span class="line">docker-compose build mysql</span><br><span class="line"></span><br><span class="line"> # 重新创建容器</span><br><span class="line">docker-compose up -d nginx mysql</span><br><span class="line"></span><br><span class="line"># 查看现有 mysql 版本</span><br><span class="line">docker inspect laradock_mysql_1</span><br><span class="line"></span><br><span class="line"># 修改MySQL密码</span><br><span class="line">mysql&gt; alter user &apos;root&apos;@&apos;localhost&apos; identified by &apos;123&apos;;</span><br><span class="line">或者</span><br><span class="line">mysql&gt; USE mysql;</span><br><span class="line">mysql&gt; UPDATE user SET authentication_string=PASSWORD(&quot;NEWPASSWORD&quot;) WHERE User=&apos;root&apos;;</span><br></pre></td></tr></table></figure>
-
-<h5 id="8-添加Redis配置"><a href="#8-添加Redis配置" class="headerlink" title="8. 添加Redis配置"></a>8. 添加Redis配置</h5><p>去修改 redis 的配置的时候，才发现默认安装的时候并没有添加 redis 的配置。所以重装配置下：<br>修改<code>laradock/redis/Dockerfile</code>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">FROM redis:latest</span><br><span class="line"></span><br><span class="line">LABEL maintainer=&quot;Mahmoud Zalt &lt;mahmoud@zalt.me&gt;&quot;</span><br><span class="line"></span><br><span class="line">## For security settings uncomment, make the dir, copy conf, and also start with the conf, to use it</span><br><span class="line">RUN mkdir -p /usr/local/etc/redis</span><br><span class="line">COPY redis.conf /usr/local/etc/redis/redis.conf</span><br><span class="line"></span><br><span class="line">VOLUME /data</span><br><span class="line"></span><br><span class="line">EXPOSE 6379</span><br><span class="line"></span><br><span class="line">CMD [&quot;redis-server&quot;, &quot;/usr/local/etc/redis/redis.conf&quot;]</span><br><span class="line">#CMD [&quot;redis-server&quot;]</span><br></pre></td></tr></table></figure>
-
-<p>编辑配置文件:<br>默认情况 <code>redis</code> 目录下有 <code>redis.conf</code> 文件，修改以下两点即可</p>
-<ol>
-<li>注释 <code>bind 127.0.0.1</code></li>
-<li><code>protected-mode</code> 改为 <code>no</code><br>其他配置根据自己情况进行修改。</li>
-</ol>
-<p>重装 redis:</p>
-<ol>
-<li>切换到 <code>laradock</code> 目录</li>
-<li>停止 <code>redis docker-compose stop redis</code></li>
-<li>重装 <code>docker-compose build --no-cache redis</code></li>
-<li>启动 <code>docker-compose up -d redis</code></li>
-</ol>
+<h5 id="Docker-For-Mac没有docker0网桥的问题"><a href="#Docker-For-Mac没有docker0网桥的问题" class="headerlink" title="Docker For Mac没有docker0网桥的问题"></a>Docker For Mac没有docker0网桥的问题</h5><p>在使用 Docker 时，要注意平台之间实现的差异性，如 Docker For Mac 的实现和标准 Docker 规范有区别，Docker For Mac 的 <code>Docker Daemon</code> 是运行于<code>虚拟机 (xhyve)</code> 中的，而不是像 Linux 上那样作为进程运行于宿主机，因此 Docker For Mac 没有 docker0 网桥，不能实现 host 网络模式，host 模式会使 <code>Container</code> 复用 <code>Daemon</code> 的网络栈 (在 <code>xhyve 虚拟机</code>中)，而不是与 Host &gt;主机网络栈，这样虽然其它容器仍然可通过 xhyve 网络栈进行交互，但却不是用的 Host 上的端口 (在 Host 上无法访问)。<code>bridge 网络模式 -p 参数</code>不受此影响，它能正常打开 Host 上的端口并映射到 <code>Container</code> 的对应 <code>Port</code>。文档在这一点上并没有充分说&gt;明，容易踩坑。</p>
 
       
     </div>
@@ -560,9 +490,7 @@
         
         <div class="post-tags">
           
-            <a href="/tags/php/" rel="tag"># php</a>
-          
-            <a href="/tags/nginx/" rel="tag"># nginx</a>
+            <a href="/tags/network/" rel="tag"># network</a>
           
         </div>
       
@@ -575,8 +503,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/11/14/mac-env-path/" rel="next" title="设置环境变量PATH 和 查看PATH">
-                <i class="fa fa-chevron-left"></i> 设置环境变量PATH 和 查看PATH
+              <a href="/2020/01/19/php-base-knowledge/" rel="next" title="CGI、FastCGI和PHP-FPM">
+                <i class="fa fa-chevron-left"></i> CGI、FastCGI和PHP-FPM
               </a>
             
           </div>
@@ -584,10 +512,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/12/24/docker-clean/" rel="prev" title="清理docker">
-                清理docker <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -819,7 +743,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-安装docker"><span class="nav-number">1.</span> <span class="nav-text">1. 安装docker</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-部署php环境"><span class="nav-number">2.</span> <span class="nav-text">2. 部署php环境</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-laravel-配置文件"><span class="nav-number">3.</span> <span class="nav-text">3. laravel 配置文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-nginx配置"><span class="nav-number">4.</span> <span class="nav-text">4. nginx配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-执行composer"><span class="nav-number">5.</span> <span class="nav-text">5. 执行composer</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-MySQL8修改验证方式"><span class="nav-number">6.</span> <span class="nav-text">6. MySQL8修改验证方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-laradock-默认装的是-mysql-最新版本-mysql8-，也可以更换成低版本的-mysql"><span class="nav-number">7.</span> <span class="nav-text">7. laradock 默认装的是 mysql 最新版本(mysql8)，也可以更换成低版本的 mysql</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8-添加Redis配置"><span class="nav-number">8.</span> <span class="nav-text">8. 添加Redis配置</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#方法介绍"><span class="nav-number">1.</span> <span class="nav-text">方法介绍</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Docker-For-Mac没有docker0网桥的问题"><span class="nav-number">2.</span> <span class="nav-text">Docker For Mac没有docker0网桥的问题</span></a></li></ol></div>
             
 
           </div>
