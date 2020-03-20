@@ -95,18 +95,18 @@
 
 
 
-  <meta name="description" content="golang 的fmt 包实现了格式化I/O函数，类似于C的 printf 和 scanf。 123456# 定义示例类型和变量type Human struct &amp;#123;    Name string&amp;#125;var people = Human&amp;#123;Name: &amp;quot;zhangsan&amp;quot;&amp;#125;   普通占位符     占位符 说明 举例 输出    %v 相应值">
-<meta name="keywords" content="Go,占位符">
+  <meta name="description" content="起因网站登录时，本地前端代码请求线上后台不能正常登录，检查跨域不存在问题；且网站线上登录正常，其他人本地登录也正常。 检查 console中发现： 1A cookie associated with a cross-site resource at http://192.168.5.23/ was set without the `SameSite` attribute. A future rel">
+<meta name="keywords" content="chrome,cookie">
 <meta property="og:type" content="article">
-<meta property="og:title" content="fmt格式 “占位符”">
-<meta property="og:url" content="https://liwengo.top/2019/07/08/go-fmt/index.html">
+<meta property="og:title" content="Chrome 80+版本，samesite cookie验证跨域问题">
+<meta property="og:url" content="https://liwengo.top/2020/03/20/chrome-samesite-cookie/index.html">
 <meta property="og:site_name" content="李子园">
-<meta property="og:description" content="golang 的fmt 包实现了格式化I/O函数，类似于C的 printf 和 scanf。 123456# 定义示例类型和变量type Human struct &amp;#123;    Name string&amp;#125;var people = Human&amp;#123;Name: &amp;quot;zhangsan&amp;quot;&amp;#125;   普通占位符     占位符 说明 举例 输出    %v 相应值">
+<meta property="og:description" content="起因网站登录时，本地前端代码请求线上后台不能正常登录，检查跨域不存在问题；且网站线上登录正常，其他人本地登录也正常。 检查 console中发现： 1A cookie associated with a cross-site resource at http://192.168.5.23/ was set without the `SameSite` attribute. A future rel">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-08T15:42:42.708Z">
+<meta property="og:updated_time" content="2020-03-20T08:03:19.457Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="fmt格式 “占位符”">
-<meta name="twitter:description" content="golang 的fmt 包实现了格式化I/O函数，类似于C的 printf 和 scanf。 123456# 定义示例类型和变量type Human struct &amp;#123;    Name string&amp;#125;var people = Human&amp;#123;Name: &amp;quot;zhangsan&amp;quot;&amp;#125;   普通占位符     占位符 说明 举例 输出    %v 相应值">
+<meta name="twitter:title" content="Chrome 80+版本，samesite cookie验证跨域问题">
+<meta name="twitter:description" content="起因网站登录时，本地前端代码请求线上后台不能正常登录，检查跨域不存在问题；且网站线上登录正常，其他人本地登录也正常。 检查 console中发现： 1A cookie associated with a cross-site resource at http://192.168.5.23/ was set without the `SameSite` attribute. A future rel">
 
 
 
@@ -114,7 +114,7 @@
 
   
   
-  <link rel="canonical" href="https://liwengo.top/2019/07/08/go-fmt/">
+  <link rel="canonical" href="https://liwengo.top/2020/03/20/chrome-samesite-cookie/">
 
 
 
@@ -124,7 +124,7 @@
   };
 </script>
 
-  <title>fmt格式 “占位符” | 李子园</title>
+  <title>Chrome 80+版本，samesite cookie验证跨域问题 | 李子园</title>
   
 
 
@@ -352,7 +352,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liwengo.top/2019/07/08/go-fmt/">
+    <link itemprop="mainEntityOfPage" href="https://liwengo.top/2020/03/20/chrome-samesite-cookie/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="多乐">
@@ -369,7 +369,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">fmt格式 “占位符”
+          <h1 class="post-title" itemprop="name headline">Chrome 80+版本，samesite cookie验证跨域问题
 
               
             
@@ -395,7 +395,7 @@
                 
               
 
-              <time title="创建时间：2019-07-08 23:20:44 / 修改时间：23:42:42" itemprop="dateCreated datePublished" datetime="2019-07-08T23:20:44+08:00">2019-07-08</time>
+              <time title="创建时间：2020-03-20 16:01:53 / 修改时间：16:03:19" itemprop="dateCreated datePublished" datetime="2020-03-20T16:01:53+08:00">2020-03-20</time>
             </span>
           
 
@@ -414,7 +414,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Go/" itemprop="url" rel="index"><span itemprop="name">Go</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
 
                 
                 
@@ -452,233 +452,68 @@
       
 
       
-        <p>golang 的fmt 包实现了格式化I/O函数，类似于C的 printf 和 scanf。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 定义示例类型和变量</span><br><span class="line">type Human struct &#123;</span><br><span class="line">    Name string</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var people = Human&#123;Name: &quot;zhangsan&quot;&#125;</span><br></pre></td></tr></table></figure>
+        <h4 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h4><p>网站登录时，本地前端代码请求线上后台不能正常登录，检查跨域不存在问题；<br>且网站线上登录正常，其他人本地登录也正常。</p>
+<h4 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h4><ol>
+<li><p>console中发现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A cookie associated with a cross-site resource at http://192.168.5.23/ was set without the `SameSite` attribute. A future release of Chrome will only deliver cookies with cross-site requests if they are set with `SameSite=None` and `Secure`. You can review cookies in developer tools under Application&gt;Storage&gt;Cookies and see more details at https://www.chromestatus.com/feature/5088147346030592 and https://www.chromestatus.com/feature/5633521622188032.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>network请求中，Set-Cookie中发现黄色感叹号，提示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this set-cookie didn&apos;t specify a &quot;SameSite&quot; attribute ......</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>普通占位符</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>占位符</th>
-<th>说明</th>
-<th>举例</th>
-<th>输出</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>%v</td>
-<td>相应值的默认格式</td>
-<td>Printf(“%v”, people)</td>
-<td>{zhangsan}</td>
-</tr>
-<tr>
-<td>%+v</td>
-<td>打印结构体时，会添加字段名</td>
-<td>Printf(“%+v”, people)</td>
-<td>{Name:zhangsan}</td>
-</tr>
-<tr>
-<td>%#v</td>
-<td>相应值的Go语法表示</td>
-<td>Printf(“#v”, people)</td>
-<td>main.Human{Name:”zhangsan”}</td>
-</tr>
-<tr>
-<td>%T</td>
-<td>相应值的类型的Go语法表示</td>
-<td>Printf(“%T”, people)</td>
-<td>main.Human</td>
-</tr>
-<tr>
-<td>%%</td>
-<td>字面上的百分号，并非值的占位符</td>
-<td>Printf(“%%”)</td>
-<td>%</td>
-</tr>
-</tbody></table>
+</li>
+</ol>
 <a id="more"></a>
 
-<ul>
-<li>布尔占位符</li>
-</ul>
+<h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><p>Chrome 80 版本升级后，提升了<code>Cookie SameSite</code>的默认安全等级，强推<code>SameSite Cookie</code></p>
 <table>
 <thead>
 <tr>
-<th>占位符</th>
-<th>说明</th>
-<th>举例</th>
-<th>输出</th>
+<th>chrome版本</th>
+<th>默认值</th>
+<th>cookie</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>%t</td>
-<td>true 或 false</td>
-<td>Printf(“%t”, true)</td>
-<td>true</td>
+<td>&lt;80</td>
+<td>SameSite=None</td>
+<td>请求带Cookie</td>
+</tr>
+<tr>
+<td>&gt;=80</td>
+<td>SameSite=Lax</td>
+<td>请求限制带Cookie</td>
 </tr>
 </tbody></table>
+<h4 id="什么是SameSite"><a href="#什么是SameSite" class="headerlink" title="什么是SameSite"></a>什么是SameSite</h4><p>SameSite 是 Chrome 51 版本为浏览器的 Cookie 新增的了一个属性， SameSite 阻止浏览器将此 Cookie 与跨站点请求一起发送。其主要目标是降低跨源信息泄漏的风险。同时也在一定程度上阻止了 CSRF（Cross-site request forgery 跨站请求伪造）。</p>
+<p>Cookie 的SameSite属性用来限制第三方 Cookie，从而减少安全风险。</p>
+<p>它可以设置三个值：</p>
 <ul>
-<li>整数占位符</li>
+<li>Strict</li>
+<li>Lax</li>
+<li>None</li>
 </ul>
-<table>
-<thead>
-<tr>
-<th>占位符</th>
-<th>说明</th>
-<th>举例</th>
-<th>输出</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>%b</td>
-<td>二进制表示</td>
-<td>Printf(“%b”, 5)</td>
-<td>101</td>
-</tr>
-<tr>
-<td>%c</td>
-<td>相应Unicode码点所表示的字符</td>
-<td>Printf(“%c”, 0x4E2D)</td>
-<td>中</td>
-</tr>
-<tr>
-<td>%d</td>
-<td>十进制表示</td>
-<td>Printf(“%d”, 0x12)</td>
-<td>18</td>
-</tr>
-<tr>
-<td>%o</td>
-<td>八进制表示</td>
-<td>Printf(“%d”, 10)</td>
-<td>12</td>
-</tr>
-<tr>
-<td>%q</td>
-<td>单引号围绕的字符字面值，由Go语法安全地转义</td>
-<td>Printf(“%q”, 0x4E2D)</td>
-<td>‘中’</td>
-</tr>
-<tr>
-<td>%x</td>
-<td>十六进制表示，字母形式为小写 a-f</td>
-<td>Printf(“%x”, 13)</td>
-<td>d</td>
-</tr>
-<tr>
-<td>%X</td>
-<td>十六进制表示，字母形式为大写 A-F</td>
-<td>Printf(“%x”, 13)</td>
-<td>D</td>
-</tr>
-<tr>
-<td>%U</td>
-<td>Unicode格式：U+1234，等同于 “U+%04X”</td>
-<td>Printf(“%U”, 0x4E2D)</td>
-<td>U+4E2D</td>
-</tr>
-</tbody></table>
+<h5 id="Strict"><a href="#Strict" class="headerlink" title="Strict"></a>Strict</h5><p>Strict最为严格，完全禁止第三方 Cookie，跨站点时，任何情况下都不会发送 Cookie。换言之，只有当前网页的 URL 与请求目标一致，才会带上 Cookie。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set-Cookie: username=xxxxx; SameSite=Strict;</span><br></pre></td></tr></table></figure>
+
+<h5 id="Lax"><a href="#Lax" class="headerlink" title="Lax"></a>Lax</h5><p>Lax规则稍稍放宽，大多数情况也是不发送第三方 Cookie，但是导航到目标网址的 Get 请求除外。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set-Cookie: username=xxxxx; SameSite=Lax;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>设置了Strict或Lax以后，基本就杜绝了 CSRF 攻击。当然，前提是用户浏览器支持 SameSite 属性。</p>
+</blockquote>
+<h5 id="None"><a href="#None" class="headerlink" title="None"></a>None</h5><p>网站可以选择显式关闭SameSite属性，将其设为None。不过，前提是必须同时设置Secure属性（Cookie 只能通过 HTTPS 协议发送），否则无效。<br>下面的设置无效：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set-Cookie: widget_session=xxxxx; SameSite=None</span><br></pre></td></tr></table></figure>
+
+<p>下面的设置有效：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set-Cookie: widget_session=xxxxx; SameSite=None; Secure</span><br></pre></td></tr></table></figure>
+
+<h4 id="本地调试解决办法"><a href="#本地调试解决办法" class="headerlink" title="本地调试解决办法"></a>本地调试解决办法</h4><p>将如下两项设置为Disabled，并重启浏览器：</p>
 <ul>
-<li>浮点数和复数的组成部分（实部和虚部）</li>
+<li><p><a href="chrome://flags/#same-site-by-default-cookies" target="_blank" rel="noopener">chrome://flags/#same-site-by-default-cookies</a></p>
+</li>
+<li><p><a href="chrome://flags/#cookies-without-same-site-must-be-secure" target="_blank" rel="noopener">chrome://flags/#cookies-without-same-site-must-be-secure</a></p>
+</li>
 </ul>
-<table>
-<thead>
-<tr>
-<th>占位符</th>
-<th>说明</th>
-<th>举例</th>
-<th>输出</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>%e</td>
-<td>科学计数法，例如 -1234.456e+78</td>
-<td>Printf(“%e”, 10.2)</td>
-<td>1.020000e+01</td>
-</tr>
-<tr>
-<td>%E</td>
-<td>科学计数法，例如 -1234.456E+78</td>
-<td>Printf(“%e”, 10.2)</td>
-<td>1.020000E+01</td>
-</tr>
-<tr>
-<td>%f</td>
-<td>有小数点而无指数，例如 123.456</td>
-<td>Printf(“%f”, 10.2)</td>
-<td>10.200000</td>
-</tr>
-<tr>
-<td>%g</td>
-<td>根据情况选择 %e 或 %f 以产生更紧凑的（无末尾的0）输出</td>
-<td>Printf(“%g”, 10.20)</td>
-<td>10.2</td>
-</tr>
-<tr>
-<td>%G</td>
-<td>根据情况选择 %E 或 %f 以产生更紧凑的（无末尾的0）输出</td>
-<td>Printf(“%G”, 10.20+2i)</td>
-<td>(10.2+2i)</td>
-</tr>
-</tbody></table>
-<ul>
-<li>字符串与字节切片</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>占位符</th>
-<th>说明</th>
-<th>举例</th>
-<th>输出</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>%s</td>
-<td>输出字符串表示（string类型或[]byte)</td>
-<td>Printf(“%s”, []byte(“Go语言”))</td>
-<td>Go语言</td>
-</tr>
-<tr>
-<td>%q</td>
-<td>双引号围绕的字符串，由Go语法安全地转义</td>
-<td>Printf(“%q”, “Go语言”)</td>
-<td>“Go语言”</td>
-</tr>
-<tr>
-<td>%x</td>
-<td>十六进制，小写字母，每字节两个字符</td>
-<td>Printf(“%x”, “golang”)</td>
-<td>676f6c616e67</td>
-</tr>
-<tr>
-<td>%X</td>
-<td>十六进制，大写字母，每字节两个字符</td>
-<td>Printf(“%X”, “golang”)</td>
-<td>676F6C616E67</td>
-</tr>
-</tbody></table>
-<ul>
-<li>指针</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>占位符</th>
-<th>说明</th>
-<th>举例</th>
-<th>输出</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>%p</td>
-<td>十六进制表示，前缀 0x</td>
-<td>Printf(“%p”, &amp;people)</td>
-<td>0x4f57f0</td>
-</tr>
-</tbody></table>
 
       
     </div>
@@ -705,9 +540,9 @@
         
         <div class="post-tags">
           
-            <a href="/tags/Go/" rel="tag"># Go</a>
+            <a href="/tags/chrome/" rel="tag"># chrome</a>
           
-            <a href="/tags/占位符/" rel="tag"># 占位符</a>
+            <a href="/tags/cookie/" rel="tag"># cookie</a>
           
         </div>
       
@@ -720,15 +555,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2020/03/12/vps-shadowsocks/" rel="next" title="vps 搭建ss">
+                <i class="fa fa-chevron-left"></i> vps 搭建ss
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/08/php-design-patterns/" rel="prev" title="设计模式">
-                设计模式 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -772,8 +607,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -952,6 +796,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#起因"><span class="nav-number">1.</span> <span class="nav-text">起因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#检查"><span class="nav-number">2.</span> <span class="nav-text">检查</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原因"><span class="nav-number">3.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是SameSite"><span class="nav-number">4.</span> <span class="nav-text">什么是SameSite</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Strict"><span class="nav-number">4.1.</span> <span class="nav-text">Strict</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Lax"><span class="nav-number">4.2.</span> <span class="nav-text">Lax</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#None"><span class="nav-number">4.3.</span> <span class="nav-text">None</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#本地调试解决办法"><span class="nav-number">5.</span> <span class="nav-text">本地调试解决办法</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
