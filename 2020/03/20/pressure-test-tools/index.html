@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="李子园">
 <meta property="og:description" content="相关概念吞吐率（Requests per second） 概念：服务并发处理能力的量化描述，单位是 reqs/s，指的是某个并发用户数下单位时间内处理的请求数。某个并发用户数下单位时间内能处理的最大请求数，称之为最大吞吐率。 计算公式：总请求数 / 处理完成这些请求数所花费的时间，即：Request per second = Complete requests / Time taken for t">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-20T08:44:51.141Z">
+<meta property="og:updated_time" content="2020-03-20T08:51:44.607Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="压测工具—ab、webbench、siege">
 <meta name="twitter:description" content="相关概念吞吐率（Requests per second） 概念：服务并发处理能力的量化描述，单位是 reqs/s，指的是某个并发用户数下单位时间内处理的请求数。某个并发用户数下单位时间内能处理的最大请求数，称之为最大吞吐率。 计算公式：总请求数 / 处理完成这些请求数所花费的时间，即：Request per second = Complete requests / Time taken for t">
@@ -395,7 +395,7 @@
                 
               
 
-              <time title="创建时间：2020-03-20 16:41:32 / 修改时间：16:44:51" itemprop="dateCreated datePublished" datetime="2020-03-20T16:41:32+08:00">2020-03-20</time>
+              <time title="创建时间：2020-03-20 16:41:32 / 修改时间：16:51:44" itemprop="dateCreated datePublished" datetime="2020-03-20T16:41:32+08:00">2020-03-20</time>
             </span>
           
 
@@ -521,7 +521,7 @@
 
 <h5 id="命令-1"><a href="#命令-1" class="headerlink" title="命令"></a>命令</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 10 秒内向 http://127.0.0.1:3001/admin 发送 500 次请求</span><br><span class="line">webbench -c 500 -t 10 http://127.0.0.1:3001/admin</span><br></pre></td></tr></table></figure>
 
-<h4 id="siege"><a href="#siege" class="headerlink" title="siege"></a>siege</h4><p>siege是我解决ab该死的 apr_socket_recv: Connection reset by peer (54) 错误时发现的一个好工具，不得不说这工具真心好，用法和webbench一样，但是信息全面很多。</p>
+<h4 id="siege"><a href="#siege" class="headerlink" title="siege"></a>siege</h4><p>siege是我解决ab该死的<code>apr_socket_recv: Connection reset by peer (54)</code>错误时发现的一个好工具，不得不说这工具真心好，用法和webbench一样，但是信息全面很多。</p>
 <h5 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install siege</span><br></pre></td></tr></table></figure>
 
 <h5 id="命令-2"><a href="#命令-2" class="headerlink" title="命令"></a>命令</h5><table>
@@ -565,15 +565,15 @@
 </tr>
 <tr>
 <td>-f</td>
-<td>指定用特定的urls文件运行 ,默认为urls.txt,位于siege安装目录下的etc/urls.txt</td>
+<td>指定用特定的urls文件运行 ,默认为<code>urls.txt</code>,位于siege安装目录下的<code>etc/urls.txt</code></td>
 </tr>
 <tr>
 <td>-R</td>
-<td>指定用特定的siege 配置文件来运行,默认的为$HOME/.siegerc</td>
+<td>指定用特定的siege 配置文件来运行,默认的为<code>$HOME/.siegerc</code></td>
 </tr>
 <tr>
 <td>-l</td>
-<td>运行结束,将统计数据保存到日志文件中siege .log,一般位于/usr/local/var/siege .log中,也可在.siegerc中自定义</td>
+<td>运行结束,将统计数据保存到日志文件中<code>siege.log</code>,一般位于<code>/usr/local/var/siege.log</code>中,也可在.siegerc中自定义</td>
 </tr>
 </tbody></table>
 <h5 id="压测结果"><a href="#压测结果" class="headerlink" title="压测结果"></a>压测结果</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//并发10个,发生5次,共50个请求</span><br><span class="line">siege -c 10 -r 5 http://www.jd.com</span><br><span class="line"></span><br><span class="line">Transactions: 350 hits //总共测试次数</span><br><span class="line">Availability: 100.00 % //成功次数百分比</span><br><span class="line">Elapsed time: 4.27 secs //总共耗时多少秒</span><br><span class="line">Data transferred: 7.08 MB //总共数据传输</span><br><span class="line">Response time: 0.07 secs //等到响应耗时</span><br><span class="line">Transaction rate: 81.97 trans/sec //平均每秒处理请求数</span><br><span class="line">Throughput: 1.66 MB/sec //吞吐率</span><br><span class="line">Concurrency: 6.06 //最高并发</span><br><span class="line">Successful transactions: 350 //成功的请求数</span><br><span class="line">Failed transactions: 0 //失败的请求数</span><br><span class="line">Longest transaction: 0.24 //每次传输所花最长时间</span><br><span class="line">Shortest transaction: 0.01 //每次传输所花最短时间</span><br></pre></td></tr></table></figure>
