@@ -16,7 +16,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="李子园">
 <meta property="og:description" content="二分搜索如果数组中的项按顺序排列，就可以不必进行线性搜索，而可以使用二分搜索。查找时，先从中间数据开始，检查中间的项是否比我们要寻找的项大或小，并决定保留哪一半，并继续重复前面的搜索，直到找到需要搜索的值。搜索长度呈指数递减，所以，最坏和平均时间复杂度为$O(logn)$，空间复杂度为$O(1)$。 12345678910111213141516function binSearch($arr, $">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-04-14T07:42:05.779Z">
+<meta property="og:updated_time" content="2020-04-14T08:17:33.014Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="算法-搜索">
 <meta name="twitter:description" content="二分搜索如果数组中的项按顺序排列，就可以不必进行线性搜索，而可以使用二分搜索。查找时，先从中间数据开始，检查中间的项是否比我们要寻找的项大或小，并决定保留哪一半，并继续重复前面的搜索，直到找到需要搜索的值。搜索长度呈指数递减，所以，最坏和平均时间复杂度为$O(logn)$，空间复杂度为$O(1)$。 12345678910111213141516function binSearch($arr, $">
@@ -161,7 +161,7 @@
   .use-motion .logo-line-before i { left: initial; }
   .use-motion .logo-line-after i { right: initial; }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -172,7 +172,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -395,7 +395,7 @@
                 
               
 
-              <time title="创建时间：2020-04-14 15:40:09 / 修改时间：15:42:05" itemprop="dateCreated datePublished" datetime="2020-04-14T15:40:09+08:00">2020-04-14</time>
+              <time title="创建时间：2020-04-14 15:40:09 / 修改时间：16:17:33" itemprop="dateCreated datePublished" datetime="2020-04-14T15:40:09+08:00">2020-04-14</time>
             </span>
           
 
@@ -1298,6 +1298,53 @@
   
 
   
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+    
+  
+
 
   
 
