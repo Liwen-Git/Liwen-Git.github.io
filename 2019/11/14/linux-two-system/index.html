@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="google-site-verification" content="-H5gyhcStCb2TtGTl0zdL2Vlis_H6aQHbYmzoOJKJR0">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.ico?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16.ico?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本教程默认已安装win10，即是在win10正常使用基础上进行的 本教程自动忽略虚拟机和wubi安装，隔靴搔痒而已，毋庸置疑最好的方式还是u盘安装 本教程同样适用于Win10+Ubuntu16.04LTS，亲测一样成功 本教程全部图片来自网络（自己太懒并没有截图，只为讲述教程进行中的画面，因此图仅供参考）  准备Ubuntu系统的的ISO、UltraISO、EasyBCD、U盘">
+<meta name="keywords" content="ubuntu,win">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Win10+Ubuntu17.04双系统安装">
+<meta property="og:url" content="https://liwengo.top/2019/11/14/linux-two-system/index.html">
+<meta property="og:site_name" content="李子园">
+<meta property="og:description" content="本教程默认已安装win10，即是在win10正常使用基础上进行的 本教程自动忽略虚拟机和wubi安装，隔靴搔痒而已，毋庸置疑最好的方式还是u盘安装 本教程同样适用于Win10+Ubuntu16.04LTS，亲测一样成功 本教程全部图片来自网络（自己太懒并没有截图，只为讲述教程进行中的画面，因此图仅供参考）  准备Ubuntu系统的的ISO、UltraISO、EasyBCD、U盘">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.zlf520.com.cn/storage/blog/WrmrRSowwCAji0DG85ueDqP0K58T1fYbsf3t1TOf.png">
+<meta property="og:image" content="https://www.zlf520.com.cn/storage/blog/07goXKc0sGobzkuyPvxwXuLp3bQPocNtIqPiKexA.png">
+<meta property="og:image" content="https://www.zlf520.com.cn/storage/blog/jhbihNrN7POzsIrFlGX2Ik4HaXTB9CZBaftDhEvf.png">
+<meta property="og:image" content="https://www.zlf520.com.cn/storage/blog/YCx6fNLItMMAxquXm3yuJZF4lRSVU683wra4ZrgH.png">
+<meta property="og:image" content="https://www.zlf520.com.cn/storage/blog/efzH2s6lRKsskAGHMAcJesblmInYCWD5IuUzuzvC.png">
+<meta property="og:image" content="https://www.zlf520.com.cn/storage/blog/lpWgvtLL6zRpEY3UyKN2Fq9OAnkC7hcCabnvIU1L.png">
+<meta property="og:image" content="https://www.zlf520.com.cn/storage/blog/5TMlK0XSGSj46fpPY4dASwXkw6iUiwb9zxhrXMUv.png">
+<meta property="og:image" content="https://www.zlf520.com.cn/storage/blog/T1OklFoA4bf5ilVNXOPpClnsgs7173rYV7fslqXb.jpeg">
+<meta property="og:image" content="https://www.zlf520.com.cn/storage/blog/ID9u1HXtsnshq4NYyW4FhCgVlcXD4i6fUbkllXSQ.jpeg">
+<meta property="og:image" content="https://www.zlf520.com.cn/storage/blog/9k9Ozy1UksO26QeTZMKnKBI5Tl34Y8ePOWhQ8dsn.png">
+<meta property="og:image" content="https://www.zlf520.com.cn/storage/blog/wxdM8iYcJdbd3A4kfDkgiyVpB5PTO7XB7RooPGFZ.jpeg">
+<meta property="og:updated_time" content="2019-11-14T09:44:00.558Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Win10+Ubuntu17.04双系统安装">
+<meta name="twitter:description" content="本教程默认已安装win10，即是在win10正常使用基础上进行的 本教程自动忽略虚拟机和wubi安装，隔靴搔痒而已，毋庸置疑最好的方式还是u盘安装 本教程同样适用于Win10+Ubuntu16.04LTS，亲测一样成功 本教程全部图片来自网络（自己太懒并没有截图，只为讲述教程进行中的画面，因此图仅供参考）  准备Ubuntu系统的的ISO、UltraISO、EasyBCD、U盘">
+<meta name="twitter:image" content="https://www.zlf520.com.cn/storage/blog/WrmrRSowwCAji0DG85ueDqP0K58T1fYbsf3t1TOf.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://liwengo.top/2019/11/14/linux-two-system/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Win10+Ubuntu17.04双系统安装 | 李子园</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">李子园</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">day day up</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liwengo.top/2019/11/14/linux-two-system/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="多乐">
+      <meta itemprop="description" content="li写东西的地方">
+      <meta itemprop="image" content="https://www.zlf520.com.cn/storage/blog/IMG_0015.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李子园">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Win10+Ubuntu17.04双系统安装
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-14 17:42:03 / 修改时间：17:44:00" itemprop="dateCreated datePublished" datetime="2019-11-14T17:42:03+08:00">2019-11-14</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+                 阅读次数： 
+                <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+            </span>
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ol>
+<li>本教程默认已安装win10，即是在win10正常使用基础上进行的</li>
+<li>本教程自动忽略虚拟机和wubi安装，隔靴搔痒而已，毋庸置疑最好的方式还是u盘安装</li>
+<li>本教程同样适用于Win10+Ubuntu16.04LTS，亲测一样成功</li>
+<li>本教程全部图片来自网络（自己太懒并没有截图，只为讲述教程进行中的画面，因此图仅供参考）</li>
+</ol>
+<h4 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h4><p>Ubuntu系统的的ISO、UltraISO、EasyBCD、U盘</p>
+<a id="more"></a>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><h5 id="数据备份"><a href="#数据备份" class="headerlink" title="数据备份"></a>数据备份</h5><h5 id="创建磁盘分区"><a href="#创建磁盘分区" class="headerlink" title="创建磁盘分区"></a>创建磁盘分区</h5><ol>
+<li><p>按住<code>Win + X</code>，选择“磁盘管理”<br><img src="https://www.zlf520.com.cn/storage/blog/WrmrRSowwCAji0DG85ueDqP0K58T1fYbsf3t1TOf.png" alt></p>
+</li>
+<li><p>选择剩余空间较大的可分配磁盘，右键并选择“压缩卷”，这里选择压缩E盘50G左右的空间<br><img src="https://www.zlf520.com.cn/storage/blog/07goXKc0sGobzkuyPvxwXuLp3bQPocNtIqPiKexA.png" alt></p>
+</li>
+<li><p>点击“压缩”之后，E盘后部出现黑色的50G“未分配空间”<br><img src="https://www.zlf520.com.cn/storage/blog/jhbihNrN7POzsIrFlGX2Ik4HaXTB9CZBaftDhEvf.png" alt></p>
+</li>
+</ol>
+<p>至此，磁盘分区过程完成</p>
+<h5 id="禁用快速启动-可选但是建议"><a href="#禁用快速启动-可选但是建议" class="headerlink" title="禁用快速启动(可选但是建议)"></a>禁用快速启动(可选但是建议)</h5><p>按住<code>Win + X</code>(请记住这个万能的组合)，选择“电源选项”，依次执行：<br>“选择电源按钮的功能” -&gt; “更改当前不可用的设置” -&gt; 取消选择”启用快速启动”</p>
+<blockquote>
+<p>注： “快速启动”是Windows 8时代引进的新特性，建议关闭该特性的原因是，“快速启动”会影响Grub开机引导过程，可能出现无法载入Ubuntu的状况，最后选择“保存修改”。</p>
+</blockquote>
+<h5 id="制作Ubuntu的启动U盘"><a href="#制作Ubuntu的启动U盘" class="headerlink" title="制作Ubuntu的启动U盘"></a>制作Ubuntu的启动U盘</h5><p>（用U盘安装过操作系统的童鞋可以跳过这一步）</p>
+<ol>
+<li><p>备份待写入的U盘并将其插入电脑，进入UltraISO，打开镜像文件（即你已经下载好的ubuntu ISO镜像文件）<br><img src="https://www.zlf520.com.cn/storage/blog/YCx6fNLItMMAxquXm3yuJZF4lRSVU683wra4ZrgH.png" alt></p>
+</li>
+<li><p>启动&gt;写入硬盘映像<br><img src="https://www.zlf520.com.cn/storage/blog/efzH2s6lRKsskAGHMAcJesblmInYCWD5IuUzuzvC.png" alt></p>
+</li>
+<li><p>按默认值写入<br><img src="https://www.zlf520.com.cn/storage/blog/lpWgvtLL6zRpEY3UyKN2Fq9OAnkC7hcCabnvIU1L.png" alt><br><img src="https://www.zlf520.com.cn/storage/blog/5TMlK0XSGSj46fpPY4dASwXkw6iUiwb9zxhrXMUv.png" alt></p>
+</li>
+<li><p>完成硬盘映像写入，别拔U盘</p>
+</li>
+</ol>
+<h5 id="U盘安装Ubuntu"><a href="#U盘安装Ubuntu" class="headerlink" title="U盘安装Ubuntu"></a>U盘安装Ubuntu</h5><p>重启，并按进入bios的快捷键(电脑不同型号快捷键不同，我的联想F2），进入系统bios后设置优先u盘启动，设置后电脑自动重启并进入ubuntu安装界面。</p>
+<ol>
+<li><p>选择“试用Ubuntu Kylin”<br><img src="https://www.zlf520.com.cn/storage/blog/T1OklFoA4bf5ilVNXOPpClnsgs7173rYV7fslqXb.jpeg" alt></p>
+</li>
+<li><p>进入ubuntu主界面然后双击打开ubuntu安装文件,完成默认设置</p>
+<blockquote>
+<p>注：如果网络和空间匀速，可以选择“安装中下载更新”和“安装这个第三方软件”（可以不选择，我建议不选择，费时间也没啥用）</p>
+</blockquote>
+</li>
+<li><p>U盘安装Ubuntu本教程最重要的的一步，选择“其他选项”<br><img src="https://www.zlf520.com.cn/storage/blog/ID9u1HXtsnshq4NYyW4FhCgVlcXD4i6fUbkllXSQ.jpeg" alt></p>
+</li>
+<li><p>单击“创建新分区表”，点击的“+”创建4个主要的基础分区（这里之前未分配的50G就是给ubuntu系统的50G），按以下参数设置4个主要的基础分区：</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>大小</th>
+<th>分区</th>
+<th>位置</th>
+<th>格式</th>
+<th>地址</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>10G</td>
+<td>主分区</td>
+<td>空间起始位置</td>
+<td>Ext4日志文件系统</td>
+<td>/</td>
+</tr>
+<tr>
+<td>4G</td>
+<td>逻辑分区</td>
+<td>空间起始位置</td>
+<td>交换空间</td>
+<td>/swap</td>
+</tr>
+<tr>
+<td>200MB</td>
+<td>逻辑分区</td>
+<td>空间起始位置</td>
+<td>Ext4日志文件系统</td>
+<td>/boot</td>
+</tr>
+<tr>
+<td>剩余的空间</td>
+<td>逻辑分区</td>
+<td>空间起始位置</td>
+<td>Ext4日志文件系统</td>
+<td>/home</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>当然这里还可创建自己的其他分区如/123分区，只要设置为逻辑分区、空间起始位置、Ext4日志文件系统即可，新手强烈建议忽略此步，按上面设置即可</p>
+</blockquote>
+<p>安装启动引导设备的参数选择：与<code>/boot</code>所在的编号一致。设置好后安装即可，之后的选项（所在地点、键盘布局、电脑名称、开机密码等）正常进行直到安装完毕，大功告成。</p>
+<ol start="5">
+<li>重启系统，进入Win10完成最后的引导设置。</li>
+</ol>
+<h5 id="EasyBCD引导Ubuntu"><a href="#EasyBCD引导Ubuntu" class="headerlink" title="EasyBCD引导Ubuntu"></a>EasyBCD引导Ubuntu</h5><ol>
+<li><p>重启在win10下进入EasyBCD，选择“添加新条目”，选择Linux/BSD操作系统，在“驱动器”栏目选择接近200M（与boot的那个接近）的Linux分区，点添加条目<br><img src="https://www.zlf520.com.cn/storage/blog/9k9Ozy1UksO26QeTZMKnKBI5Tl34Y8ePOWhQ8dsn.png" alt></p>
+</li>
+<li><p>完成条目添加后，重启电脑，会发现Win10和Ubuntu的双系统已经完成安装<br><img src="https://www.zlf520.com.cn/storage/blog/wxdM8iYcJdbd3A4kfDkgiyVpB5PTO7XB7RooPGFZ.jpeg" alt></p>
+</li>
+<li><p>大功告成，祝玩得开心</p>
+<blockquote>
+<p>后记：用Windows引导Ubuntu最大的好处就是，当不再需要Ubuntu的时候，直接在Windows磁盘管理中将其所在所有分区删除，然后将EasyBCD中对应条目删除即可。</p>
+</blockquote>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/ubuntu/" rel="tag"># ubuntu</a>
+          
+            <a href="/tags/win/" rel="tag"># win</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/14/linux-centos-add-new-user/" rel="next" title="CentOS 7 中添加一个新用户并授权">
+                <i class="fa fa-chevron-left"></i> CentOS 7 中添加一个新用户并授权
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/14/linux-https-http2/" rel="prev" title="配置https 和 HTTP2">
+                配置https 和 HTTP2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://www.zlf520.com.cn/storage/blog/IMG_0015.JPG" alt="多乐">
+            
+              <p class="site-author-name" itemprop="name">多乐</p>
+              <div class="site-description motion-element" itemprop="description">li写东西的地方</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">50</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Liwen-Git" title="GitHub &rarr; https://github.com/Liwen-Git" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:liwen1010322212@163.com" title="E-Mail &rarr; mailto:liwen1010322212@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/liwen_com" title="Twitter &rarr; https://twitter.com/liwen_com" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#准备"><span class="nav-number">1.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数据备份"><span class="nav-number">2.1.</span> <span class="nav-text">数据备份</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#创建磁盘分区"><span class="nav-number">2.2.</span> <span class="nav-text">创建磁盘分区</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#禁用快速启动-可选但是建议"><span class="nav-number">2.3.</span> <span class="nav-text">禁用快速启动(可选但是建议)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#制作Ubuntu的启动U盘"><span class="nav-number">2.4.</span> <span class="nav-text">制作Ubuntu的启动U盘</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#U盘安装Ubuntu"><span class="nav-number">2.5.</span> <span class="nav-text">U盘安装Ubuntu</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#EasyBCD引导Ubuntu"><span class="nav-number">2.6.</span> <span class="nav-text">EasyBCD引导Ubuntu</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">多乐</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">© 2018-2019 Powered By  <a href="https://github.com/Liwen-Git" class="theme-link" rel="noopener" target="_blank">多乐</a> </div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info"> <a href="http://www.beian.miit.gov.cn/" class="theme-link" rel="noopener" target="_blank">粤ICP备19082463号</a> </div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
