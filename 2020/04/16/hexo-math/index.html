@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="李子园">
 <meta property="og:description" content="安装配置hexo-mathhexo 中已经对mathjax、katex 进行了集成，这里使用的是mathjax，需要先下载 hexo-math 1npm install hexo-math --save  然后在站点目录下_config.yml 中配置 123math:  engine: &amp;apos;mathjax&amp;apos; # or &amp;apos;katex&amp;apos;  mathjax:">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-04-16T06:07:26.028Z">
+<meta property="og:updated_time" content="2020-04-16T06:22:18.900Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo 插入数学公式">
 <meta name="twitter:description" content="安装配置hexo-mathhexo 中已经对mathjax、katex 进行了集成，这里使用的是mathjax，需要先下载 hexo-math 1npm install hexo-math --save  然后在站点目录下_config.yml 中配置 123math:  engine: &amp;apos;mathjax&amp;apos; # or &amp;apos;katex&amp;apos;  mathjax:">
@@ -395,7 +395,7 @@
                 
               
 
-              <time title="创建时间：2020-04-16 14:03:39 / 修改时间：14:07:26" itemprop="dateCreated datePublished" datetime="2020-04-16T14:03:39+08:00">2020-04-16</time>
+              <time title="创建时间：2020-04-16 14:03:39 / 修改时间：14:22:18" itemprop="dateCreated datePublished" datetime="2020-04-16T14:03:39+08:00">2020-04-16</time>
             </span>
           
 
@@ -1319,7 +1319,7 @@
         onPopupClose();
       }
     });
-  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </script>
 
 
 
@@ -1335,6 +1335,46 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+    
   
 
 
