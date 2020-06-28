@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://www.liwengo.top/2019/12/24/docker-php-env/</loc>
+    <lastmod>2020-06-28T11:49:23.990Z</lastmod>
+  </url>  <url>
     <loc>https://www.liwengo.top/2020/05/15/cross-origin-resource-summary/</loc>
     <lastmod>2020-05-15T08:25:13.943Z</lastmod>
   </url>  <url>
@@ -99,9 +102,6 @@
   </url>  <url>
     <loc>https://www.liwengo.top/2020/01/19/mysql-engines/</loc>
     <lastmod>2020-01-19T10:24:10.277Z</lastmod>
-  </url>  <url>
-    <loc>https://www.liwengo.top/2019/12/24/docker-php-env/</loc>
-    <lastmod>2020-01-19T10:10:44.783Z</lastmod>
   </url>  <url>
     <loc>https://www.liwengo.top/2020/01/06/docker-jenkins/</loc>
     <lastmod>2020-01-06T03:02:19.980Z</lastmod>
