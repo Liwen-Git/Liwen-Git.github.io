@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.liwengo.top/2020/06/28/nginx-php-fpm-authority/</loc>
+    
+    <lastmod>2020-06-28T12:12:32.560Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.liwengo.top/2020/06/28/xss-and-csrf/</loc>
+    
+    <lastmod>2020-06-28T12:10:43.767Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.liwengo.top/2020/06/28/nginx-root-alias/</loc>
+    
+    <lastmod>2020-06-28T12:07:49.330Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.liwengo.top/2019/12/24/docker-php-env/</loc>
     
     <lastmod>2020-06-28T11:49:23.990Z</lastmod>

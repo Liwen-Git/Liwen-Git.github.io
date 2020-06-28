@@ -1,3 +1,6 @@
+https://www.liwengo.top/2020/06/28/nginx-php-fpm-authority/
+https://www.liwengo.top/2020/06/28/xss-and-csrf/
+https://www.liwengo.top/2020/06/28/nginx-root-alias/
 https://www.liwengo.top/2020/05/15/cross-origin-resource-summary/
 https://www.liwengo.top/2020/05/15/mysql-database-lock/
 https://www.liwengo.top/2020/04/27/database-myisam-innodb/
