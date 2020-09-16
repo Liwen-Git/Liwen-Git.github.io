@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://www.liwengo.top/2020/03/12/mqtt-introduction/</loc>
+    <lastmod>2020-09-16T06:53:32.746Z</lastmod>
+  </url>  <url>
+    <loc>https://www.liwengo.top/2020/09/16/docker-static-ip/</loc>
+    <lastmod>2020-09-16T06:50:51.276Z</lastmod>
+  </url>  <url>
     <loc>https://www.liwengo.top/2020/07/07/npm-save-dev/</loc>
     <lastmod>2020-07-07T09:55:25.637Z</lastmod>
   </url>  <url>
@@ -105,9 +111,6 @@
   </url>  <url>
     <loc>https://www.liwengo.top/2020/03/12/vps-shadowsocks/</loc>
     <lastmod>2020-03-12T08:23:57.861Z</lastmod>
-  </url>  <url>
-    <loc>https://www.liwengo.top/2020/03/12/mqtt-introduction/</loc>
-    <lastmod>2020-03-12T08:19:22.215Z</lastmod>
   </url>  <url>
     <loc>https://www.liwengo.top/2020/03/12/ioc-and-di/</loc>
     <lastmod>2020-03-12T08:15:49.329Z</lastmod>

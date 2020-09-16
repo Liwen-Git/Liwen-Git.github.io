@@ -95,18 +95,18 @@
 
 
 
-  <meta name="description" content="简述MQTT（Message Queuing Telemetry Transport，消息队列遥测传输协议），是一个基于客户端-服务器的消息发布/订阅传输协议。 安装 Mac：brew install mosquitto CentOS：yum install mosquitto">
+  <meta name="description" content="简述MQTT（Message Queuing Telemetry Transport，消息队列遥测传输协议），是一个基于客户端-服务器的消息发布/订阅传输协议。 安装检查epel源 12345## 如下已存在epel源，则不需要安装➜ yum repolist | grep epel## 如果不存在，则需要安装 epel➜ yum -y install epel-release  安装  Mac：">
 <meta name="keywords" content="mqtt,消息队列">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MQTT简介">
 <meta property="og:url" content="https://www.liwengo.top/2020/03/12/mqtt-introduction/index.html">
 <meta property="og:site_name" content="李子园">
-<meta property="og:description" content="简述MQTT（Message Queuing Telemetry Transport，消息队列遥测传输协议），是一个基于客户端-服务器的消息发布/订阅传输协议。 安装 Mac：brew install mosquitto CentOS：yum install mosquitto">
+<meta property="og:description" content="简述MQTT（Message Queuing Telemetry Transport，消息队列遥测传输协议），是一个基于客户端-服务器的消息发布/订阅传输协议。 安装检查epel源 12345## 如下已存在epel源，则不需要安装➜ yum repolist | grep epel## 如果不存在，则需要安装 epel➜ yum -y install epel-release  安装  Mac：">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-12T08:19:22.215Z">
+<meta property="og:updated_time" content="2020-09-16T06:53:32.746Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MQTT简介">
-<meta name="twitter:description" content="简述MQTT（Message Queuing Telemetry Transport，消息队列遥测传输协议），是一个基于客户端-服务器的消息发布/订阅传输协议。 安装 Mac：brew install mosquitto CentOS：yum install mosquitto">
+<meta name="twitter:description" content="简述MQTT（Message Queuing Telemetry Transport，消息队列遥测传输协议），是一个基于客户端-服务器的消息发布/订阅传输协议。 安装检查epel源 12345## 如下已存在epel源，则不需要安装➜ yum repolist | grep epel## 如果不存在，则需要安装 epel➜ yum -y install epel-release  安装  Mac：">
 
 
 
@@ -411,13 +411,23 @@
                 
               
 
-              <time title="创建时间：2020-03-12 16:17:05 / 修改时间：16:19:22" itemprop="dateCreated datePublished" datetime="2020-03-12T16:17:05+08:00">2020-03-12</time>
+              <time title="创建时间：2020-03-12 16:17:05" itemprop="dateCreated datePublished" datetime="2020-03-12T16:17:05+08:00">2020-03-12</time>
             </span>
           
 
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-09-16 14:53:32" itemprop="dateModified" datetime="2020-09-16T14:53:32+08:00">2020-09-16</time>
+              </span>
             
           
 
@@ -477,12 +487,48 @@
 
       
         <h4 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h4><p>MQTT（Message Queuing Telemetry Transport，消息队列遥测传输协议），是一个基于客户端-服务器的消息发布/订阅传输协议。</p>
-<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><ul>
-<li>Mac：<code>brew install mosquitto</code></li>
-<li>CentOS：<code>yum install mosquitto</code></li>
-</ul>
-<a id="more"></a>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p>检查<code>epel</code>源</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 如下已存在epel源，则不需要安装</span></span><br><span class="line">➜ yum repolist | grep epel</span><br><span class="line"></span><br><span class="line"><span class="comment">## 如果不存在，则需要安装 epel</span></span><br><span class="line">➜ yum -y install epel-release</span><br></pre></td></tr></table></figure>
 
+<p>安装</p>
+<ul>
+<li>Mac：<code>brew install mosquitto</code></li>
+<li>CentOS：<code>yum install mosquitto</code><a id="more"></a>
+启动mosquitto<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 启动</span></span><br><span class="line">➜ systemctl start mosquitto</span><br><span class="line"><span class="comment">## 停止</span></span><br><span class="line">➜ systemctl stop mosquitto</span><br><span class="line"><span class="comment">## 重新启动</span></span><br><span class="line">➜ systemctl restart mosquitto</span><br><span class="line"><span class="comment">## 查看运行状态 </span></span><br><span class="line">➜ systemctl status mosquitto</span><br><span class="line"><span class="comment">## 设为开机启动</span></span><br><span class="line">➜ systemctl <span class="built_in">enable</span> mosquitto</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>设置账号密码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## username1 为你的用户名</span></span><br><span class="line">➜ mosquitto_passwd -c /etc/mosquitto/passwd username1</span><br><span class="line"><span class="comment">## 输入密码，确认密码</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 如果要添加多个用户使用 -b 参数 </span></span><br><span class="line"><span class="comment">## 必须在控制台输入明文的密码，且文件不会覆盖之前的</span></span><br><span class="line">➜ mosquitto_passwd -b /etc/mosquitto/passwd username2 password2</span><br></pre></td></tr></table></figure>
+
+<p>备份配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/mosquitto/</span><br><span class="line">cp mosquitto.conf mosquitto.conf.bak</span><br></pre></td></tr></table></figure>
+
+<p>修改配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 禁止匿名访问</span></span><br><span class="line">allow_anonymous <span class="literal">false</span></span><br><span class="line"><span class="comment"># 用户及密码存储文件</span></span><br><span class="line">password_file /etc/mosquitto/passwd</span><br><span class="line"><span class="comment"># 端口号</span></span><br><span class="line">port 1883</span><br></pre></td></tr></table></figure>
+
+<p>重启MQTT</p>
+<hr>
+<p><strong>TIPS:</strong></p>
+<ul>
+<li><p>防火墙状态：<code>firewall-cmd --state</code></p>
+</li>
+<li><p>防火墙停止：<code>systemctl stop firewalld.service</code></p>
+</li>
+<li><p>查看防火墙zone：<code>firewall-cmd --get-active-zones</code></p>
+</li>
+<li><p>防火墙永久开放端口：<code>firewall-cmd --zone=public --add-port=1888/tcp --permanent</code></p>
+</li>
+<li><p>防火墙重启：<code>firewall-cmd --reload</code></p>
+</li>
+<li><p>查看所有打开的端口：<code>firewall-cmd --zone=public --list-ports</code></p>
+</li>
+<li><p>iptables状态：<code>systemctl status iptables</code></p>
+</li>
+<li><p>iptables影响mqtt远程连接，直接关闭了：<code>systemctl stop iptables</code></p>
+</li>
+</ul>
+<hr>
 <h4 id="订阅主题"><a href="#订阅主题" class="headerlink" title="订阅主题"></a>订阅主题</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@c7-ehotel-liudf-201 ~]# mosquitto_sub -d -h 192.168.5.201 -p 1883 -u tcl -P tcl801 -t tv/marquee/0440001/103/520012518815</span><br><span class="line">Client mosqsub|30292-c7-ehotel sending CONNECT</span><br><span class="line">Client mosqsub|30292-c7-ehotel received CONNACK</span><br><span class="line">Client mosqsub|30292-c7-ehotel sending SUBSCRIBE (Mid: 1, Topic: tv/marquee/0440001/103/520012518815, QoS: 0)</span><br><span class="line">Client mosqsub|30292-c7-ehotel received SUBACK</span><br><span class="line">Subscribed (mid: 1): 0</span><br></pre></td></tr></table></figure>
 
 <p>解析：</p>
@@ -638,7 +684,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">68</span>
+                    <span class="site-state-item-count">69</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -776,7 +822,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">42</span>
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
