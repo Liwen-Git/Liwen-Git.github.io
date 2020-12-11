@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="李子园">
 <meta property="og:description" content="起因在项目中启用多个容器，有时候需要多个容器间进行通信，就需要绑定其他容器，但是docker每次重启后，容器的IP地址都会变化，所以需要固定容器IP。 docker默认网络Docker安装后，默认会创建下面三种网络类型： 12345$ docker network lsNETWORK ID          NAME                DRIVER              SCOPE">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-16T06:50:51.276Z">
+<meta property="og:updated_time" content="2020-09-16T07:38:55.059Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker 容器固定IP">
 <meta name="twitter:description" content="起因在项目中启用多个容器，有时候需要多个容器间进行通信，就需要绑定其他容器，但是docker每次重启后，容器的IP地址都会变化，所以需要固定容器IP。 docker默认网络Docker安装后，默认会创建下面三种网络类型： 12345$ docker network lsNETWORK ID          NAME                DRIVER              SCOPE">
@@ -411,7 +411,7 @@
                 
               
 
-              <time title="创建时间：2020-09-16 14:39:59 / 修改时间：14:50:51" itemprop="dateCreated datePublished" datetime="2020-09-16T14:39:59+08:00">2020-09-16</time>
+              <time title="创建时间：2020-09-16 14:39:59 / 修改时间：15:38:55" itemprop="dateCreated datePublished" datetime="2020-09-16T14:39:59+08:00">2020-09-16</time>
             </span>
           
 
@@ -482,9 +482,7 @@
 
 <a id="more"></a>
 <ul>
-<li><p>bridge：桥接网络</p>
-</li>
-<li><p><em>默认情况下启动的Docker容器，都是使用 bridge*</em>，Docker安装时创建的桥接网络，每次Docker容器重启时，会按照顺序获取对应的IP地址，这个就导致重启下，Docker的IP地址就变了</p>
+<li><p>bridge：桥接网络<br>默认情况下启动的Docker容器，都是使用bridge，Docker安装时创建的桥接网络，每次Docker容器重启时，会按照顺序获取对应的IP地址，这个就导致重启下，Docker的IP地址就变了</p>
 </li>
 <li><p>none：无指定网络<br>使用 <code>--network=none</code> ，docker 容器就不会分配局域网的IP</p>
 </li>
@@ -553,6 +551,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/12/11/vue-watch-and-computed/" rel="prev" title="computed 和 watch 的异同">
+                computed 和 watch 的异同 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -623,7 +625,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-count">73</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -763,7 +765,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">43</span>
+                      
+                    
+                    <span class="site-state-item-count">44</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

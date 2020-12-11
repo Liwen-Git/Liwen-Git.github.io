@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.liwengo.top/2020/03/12/mqtt-introduction/</loc>
-    <lastmod>2020-09-16T06:53:32.746Z</lastmod>
+    <loc>https://www.liwengo.top/2020/12/11/vue-watch-and-computed/</loc>
+    <lastmod>2020-12-11T09:52:02.989Z</lastmod>
+  </url>  <url>
+    <loc>https://www.liwengo.top/2020/12/11/docker-import-export/</loc>
+    <lastmod>2020-12-11T09:40:37.008Z</lastmod>
+  </url>  <url>
+    <loc>https://www.liwengo.top/2020/12/11/podman-and-docker/</loc>
+    <lastmod>2020-12-11T09:37:23.985Z</lastmod>
+  </url>  <url>
+    <loc>https://www.liwengo.top/2020/12/11/add-centos-memory/</loc>
+    <lastmod>2020-12-11T09:31:02.871Z</lastmod>
   </url>  <url>
     <loc>https://www.liwengo.top/2020/09/16/docker-static-ip/</loc>
-    <lastmod>2020-09-16T06:50:51.276Z</lastmod>
+    <lastmod>2020-09-16T07:38:55.059Z</lastmod>
+  </url>  <url>
+    <loc>https://www.liwengo.top/2020/03/12/mqtt-introduction/</loc>
+    <lastmod>2020-09-16T06:53:32.746Z</lastmod>
   </url>  <url>
     <loc>https://www.liwengo.top/2020/07/07/npm-save-dev/</loc>
     <lastmod>2020-07-07T09:55:25.637Z</lastmod>
