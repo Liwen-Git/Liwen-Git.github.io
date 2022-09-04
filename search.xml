@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[webhook 自动部署]]></title>
+    <url>%2F2022%2F02%2F24%2Fgit-webhook%2F</url>
+    <content type="text"><![CDATA[原理 push代码到github的时候，github会监听push动作 然后就会访问github中webhook配置的url,如：https://xxx.com/webhook.php webhook.php中的代码会在服务器中git pull相应的代码到web目录中 配置 如果回调成功了会返回Response 200. webhook.php 脚本实现1234567891011121314151617&lt;?php //git webhook 自动部署脚本 //接收数据 $requestBody = file_get_contents(&quot;php://input&quot;); if (empty($requestBody)) &#123; die(&apos;send fail&apos;); &#125; $content = json_decode($requestBody, true); //数据转换 //若是主分支且提交数大于0 if ($content[&apos;ref&apos;] == &apos;refs/heads/master&apos;) &#123; //PHP函数执行git命令 $res = shell_exec(&apos;cd /root/www/project &amp;&amp; git pull 2&gt;&amp;1); $res_log = &apos;-------------------------&apos;.PHP_EOL; $res_log .= &apos; 在&apos; . date(&apos;Y-m-d H:i:s&apos;) . &apos;向&apos; . $content[&apos;repository&apos;][&apos;name&apos;] . &apos;项目的&apos; . $content[&apos;ref&apos;] . &apos;分支push&apos;.$res; //将每次拉取信息追加写入到日志里 file_put_contents(&quot;git-webhook.txt&quot;, $res_log, FILE_APPEND); &#125; 给回调程序加上执行权限 1chmod 755 webhook.php 各种坑 git pull失败原因 权限问题，nginx是www用户，.git文件是root创建的，www对.git没有访问权限，需要修改.git文件的用户和组。 ssh密钥是root用户创建的，www也没有访问权限，需要切换www用户重新生成ssh密钥。]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Go + Oracle + Xorm + go-oci8]]></title>
+    <url>%2F2021%2F11%2F08%2Fgo-oracle-xorm-go-oci8%2F</url>
+    <content type="text"><![CDATA[一、系统环境 win10 oracle OCI -&gt; instantclient-basic-windows.x64-12.2.0.1.0 OCI SDK -&gt; instantclient-sdk-windows.64-12.1.0.2.0 MinGW 64bit go1.11.10 windows/amd64 二、安装MinGW 下载地址 https://sourceforge.net/projects/mingw-w64/files/ 安装MinG 修改Architecture为：x86_64，点击 Next &gt; 直到安装完成。注意：安装路径，后面需要用到 设置环境变量 设置环境变量Path，添加：C:\Program Files\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin 下载 pkg-config.exe，并复制到 C:\Program Files\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin 目录下 下载地址：https://raw.githubusercontent.com/wendal/go-oci8/master/windows/pkg-config.exe开源地址：https://github.com/wendal/go-oci8 三、下载Oracle的OCI和SDK 下载对应的版本 下载地址：https://www.oracle.com/technetwork/topics/winx64soft-089540.html 创建存放目录：C:\instantclient_12_2，并将oci的两个压缩文件解压到目录中 设置环境变量Path，添加：C:\instantclient_12_2 四、修改oci8.pc 在 C:\Program Files\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\lib 下创建pkg-config目录 复制 C:\Go\www\src\github.com\mattn\go-oci8 下的oci8.pc文件 至 pkg-config目录下 修改oci8.pc 中的oci路径 12345678910prefix=C:/instantclient_12_2exec_prefix=$&#123;prefix&#125;libdir=$&#123;prefix&#125;/sdk/lib/msvcincludedir=$&#123;prefix&#125;/sdk/includeName: oci8Description: oci8 libraryLibs: -L$&#123;libdir&#125; -lociCflags: -I$&#123;includedir&#125;Version: 12.2 新建 PKG_CONFIG_PATH 环境变量，设置为：C:\Program Files\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\lib\pkg-config 五、检查 检查mingw-w64是否装好： 检查方式 cmd中输入gcc 输出结果是 gcc: fatal error: no input files compilation terminated. 表明mingw-w64安装好。 检查oci8.pc能否找到： 在cmd下执行 pkg-config –cflags –libs oci8 出现 -IC:/instantclient_12_2/sdk/include -LC:/instantclient_12_2/sdk/lib/msvc -loci 类似字样 表明是找到了 oci8.pc 文件 如果找不到 输出为空：（1）看看环境变量PKG_CONFIG_PATH 位置是不是包含oci8.pc （2）最好加入一个环境变量PKG_CONFIG 值C:\Program Files\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\pkg-config.exe go build 编译之后报错：msvcr120.dll文件丢失 安装VC++2013下载地址：https://www.microsoft.com/zh-CN/download/details.aspx?id=40784]]></content>
+      <categories>
+        <category>Go</category>
+      </categories>
+      <tags>
+        <tag>Go</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[win下php安装oci8扩展]]></title>
+    <url>%2F2021%2F09%2F15%2Fwin-go-oci8%2F</url>
+    <content type="text"><![CDATA[由于数据库是oracle，所以本地必须安装oci扩展，有pdo_oci不行，还必须得有php_oci8，所以记录一下安装过程。 安装客户端首先下载oracle的数据库即时客户端 oracle instantclient；（客户端的版本很重要，客户的版本对应php版本的位数，而不是系统的位数） 地址：http://www.oracle.com/technetwork/cn/database/features/instant-client/index-097480.html 按步骤安装，并把安装目录中的bin目录加入环境变量。 安装php扩展下载php_oci8扩展组件，选择php版本相对应的dll扩展；（2.1是对应php7，2.0对应是php5.6及一下版本） 地址：http://pecl.php.net/package/oci8 下载对应版本的扩展包之后，把压缩包中的dll文件解压到php目录中的ext文件夹下，然后修改php.ini,添加php_oci8扩展。比如下图 安全起见可以先重启系统（强烈建议），再测试是否安装成功：]]></content>
+      <categories>
+        <category>Go</category>
+      </categories>
+      <tags>
+        <tag>Go</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[PHP获取Nginx反向代理后的真实IP]]></title>
     <url>%2F2021%2F07%2F27%2Fnginx-real-ip%2F</url>
     <content type="text"><![CDATA[一、获取用户真实IP地址上代码 12345678910111213141516171819public static function getClientIp()&#123; if (getenv('HTTP_CLIENT_IP')) &#123; $ip = getenv('HTTP_CLIENT_IP'); &#125; if (getenv('HTTP_X_REAL_IP')) &#123; $ip = getenv('HTTP_X_REAL_IP'); &#125; elseif (getenv('HTTP_X_FORWARDED_FOR')) &#123; $ip = getenv('HTTP_X_FORWARDED_FOR'); $ips = explode(',', $ip); $ip = $ips[0]; &#125; elseif (getenv('REMOTE_ADDR')) &#123; $ip = getenv('REMOTE_ADDR'); &#125; else &#123; $ip = '0.0.0.0'; &#125; return $ip;&#125; PS: $_SERVER和getenv的区别，getenv不支持IIS的isapi方式运行的php；getenv(“REMOTE_ADDR”)函数在 apache下能正常获取ip地址，而在iis中没有作用；$_SERVER[&#39;REMOTE_ADDR&#39;]函数，既可在apache中成功获取访客的ip地址，在iis下也同样有效 二、HTTP_X_FORWARDED_FOR 关于 REMOTE_ADDR这个变量获取到的是直接来源的 IP 地址，所谓直接来源指的是直接请求该地址的客户端 IP 。这个 IP 在单服务器的情况下，很准确的是客户端 IP ，无法伪造。当然并不是所有的程序都一定是单服务器，比如在采用负载均衡的情况（比如采用 haproxy 或者 nginx 进行负载均衡），这个 IP 就是转发机器的 IP ，因为过程是客户端-&gt;负载均衡-&gt;服务端。是由负载均衡直接访问的服务端而不是客户端。 关于 HTTP_X_FORWARDED_FOR 和 HTTP_CLIENT_IP基于《一》，在负载均衡的情况下直接使用 REMOTE_ADDR 是无法获取客户端 IP 的，这就是一个问题，必须解决。于是就衍生出了负载均衡端将客户端 IP 加入到 HEAD 中发送给服务端，让服务端可以获取到客户端的真实 IP 。当然也就产生了各位所说的伪造，毕竟 HEAD 除了协议里固定的那几个数据，其他数据都是可自定义的。 X-Forwarded-For 和 X-Real-IP区别X-Forwarded-For是用于记录代理信息的，每经过一级代理(匿名代理除外)，代理服务器都会把这次请求的来源IP追加在X-Forwarded-For中, 而X-Real-IP，没有相关标准, 其值在不同的代理环境不固定 总结 HTTP_CLIENT_IP: 头是有的，只是未成标准，不一定服务器都实现了。X-Forwarded-For（XFF）: 是用来识别通过HTTP代理或负载均衡方式连接到Web服务器的客户端最原始的IP地址的HTTP请求头字段, 格式：clientip,proxy1,proxy2REMOTE_ADDR: 是可靠的， 它是最后一个跟你的服务器握手的IP，可能是用户的代理服务器，也可能是自己的反向代理。 三、负载均衡和CDN情况负载均衡graph TD A[用户访问] -->B(nginx负载均衡服务器) B --> D[nginx服务器1] B --> E[nginx服务器2] B --> F[nginx服务器3] 生产环境中很多服务器隐藏在负载均衡节点后面，你通过REMOTE_ADDR只能获取到负载均衡节点的ip地址，一般的负载均衡节点会把前端实际的ip地址通过HTTP_CLIENT_IP或者HTTP_X_FORWARDED_FOR这两种http头传递过来。 后端再去读取这个值就是真实可信的，因为它是负载均衡节点告诉你的而不是客户端。但当你的服务器直接暴露在客户端前面的时候，请不要信任这两种读取方法，只需要读取REMOTE_ADDR就行了 CDNgraph TD A[客户端 IP:210.32.132.83] --> B(CDN ip:14.215.167.197) B -->|CDN回源,添加用户IP http_x_forwarded_for:201.32.132.83| C[代理服务器nginx] C -->|反向代理,添加上一个节点IP,http_x_forwarded_for:201.32.132.83,14.215.167.197| D[服务器Apache] 所以对于我们获取用户的IP，应该截取http_x_forwarded_for的第一个有效IP(非unknown)。 多层代理时，和cdn方式类似。 注意：无论是REMOTE_ADDR还是HTTP_FORWARDED_FOR，这些头消息未必能够取得到,因为不同的浏览器不同的网络设备可能发送不同的IP头消息 四、swoole+nginx下获取真实IP最近在使用swoole框架的时候，发现原来php-fpm模式的获取客户端真实的IP发现不能工作了，因为在imi的框架中规定:禁止使用$_GET、$_POST、$GLOBALS、$_SERVER、$_FILES、$_COOKIE、$_SESSION、$_REQUEST、$_ENV等超全局变量 ,上面的获取客户端IP不能使用了。 实现代码如下： 1234567891011121314151617181920212223use Imi\Server\Http\Message\Request;/** * @param Request $request * @param int $type 返回类型 0 返回IP地址 1 返回IPV4地址数字 * @return mixed */public static function getRealIp(Request $request, $type = 0) &#123; $serverParams = $request-&gt;getServerParams(); $HeaderParams = $request-&gt;getHeaders(); if(isset($HeaderParams['x-real-ip'][0])&amp;&amp;($HeaderParams['x-real-ip'][0]!=='127.0.0.1')&amp;&amp;($HeaderParams['x-real-ip'][0]!=='localhost'))&#123; $ip = $HeaderParams['x-real-ip'][0]; &#125; else if(isset($HeaderParams['x-forwarded-for'][0])&amp;&amp;($HeaderParams['x-forwarded-for'][0] !=="127.0.0.1")&amp;&amp;($HeaderParams['x-forwarded-for'][0]!=='localhost'))&#123; $ip = $HeaderParams['x-forwarded-for'][0]; &#125; else if($serverParams['remote_addr']) &#123; $ip = $serverParams['remote_addr']; &#125; else &#123; $ip = '0.0.0.0'; &#125; // IP地址合法验证 $long = sprintf("%u", ip2long($ip)); $ip = $long ? array($ip, $long) : array('0.0.0.0', 0); return $ip[$type];&#125; nginx配置如下： 12345678910111213141516171819202122232425server &#123; listen 80; server_name www.your_domain.com; error_log /var/log/nginx/swoft.error.log; access_log /var/log/nginx/swoft.access.log; ##### 通用规则: 上面的都不匹配 location / &#123; ##跨域设置 add_header Access-Control-Allow-Origin *; add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS'; add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization'; if ($request_method = 'OPTIONS') &#123; return 204; &#125; proxy_set_header X-Real-IP $remote_addr; proxy_set_header Host $host; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_http_version 1.1; proxy_pass http://127.0.0.1:18306; &#125;&#125;]]></content>
@@ -20,6 +53,39 @@
       </categories>
       <tags>
         <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[linux 环境配置 go-oci8]]></title>
+    <url>%2F2021%2F05%2F27%2Flinux-go-oci8%2F</url>
+    <content type="text"><![CDATA[使用 https://github.com/mattn/go-oci8 库连接oralce，以下主要记录环境配置过程： 1. 安装oracle客户端下载路径：https://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html下载文件： oracle-instantclient11.2-basic-11.2.0.4.0-1.x86_64.rpm oracle-instantclient11.2-devel-11.2.0.4.0-1.x86_64.rpm oracle-instantclient11.2-sqlplus-11.2.0.4.0-1.x86_64.rpm rpm -ivh 依次安装，默认安装路径：/usr/lib/oracle/11.2/client64 2. 配置oci8.pc 新建/usr/lib/pkg-config文件夹 在文件夹下新建oci8.pc123456789prefix=/usr/lib/oracle/11.2/client64libdir=$&#123;prefix&#125;/libincludedir=/usr/include/oracle/11.2/client64Name: oci8Description: Oracle Instant ClientVersion: 11.2Cflags: -I$&#123;includedir&#125;Libs: -L$&#123;libdir&#125; -lclntsh 3. 配置环境变量编辑 /etc/profile 123export ORACLE_HOME=/usr/lib/oracle/11.2/client64export LD_LIBRARY_PATH=/usr/lib/oracle/11.2/client64/libexport PKG_CONFIG_PATH=/usr/lib/pkg-config/ 执行source /etc/profile 生效 4. 相关报错 go run main.go 报错：1234# command-line-arguments/root/go1.11.1/pkg/tool/linux_amd64/link: running gcc failed: exit status 1/usr/bin/ld: cannot find -lclntshcollect2: error: ld returned 1 exit status 解决办法： 1ln -s /usr/lib/oracle/11.2/client64/lib/libclntsh.so.11.1 /usr/lib/libclntsh.so]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Go</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[redis 和 memcached]]></title>
+    <url>%2F2021%2F03%2F21%2Fredis-and-memcached%2F</url>
+    <content type="text"><![CDATA[memcached简介： 高性能分布式内存缓存服务器。其本质上就是一个内存key-value数据库，但是不支持数据的持久化，服务器关闭之后数据全部丢失。 redis简介： Redis是一个开源的key-value存储系统。与Memcached类似，Redis将大部分数据存储在内存中。 支持的数据类型包括：字符串string、哈希表hash、链表list、集合set、有序集合zset以及基于这些数据类型的相关操作。 读：110000次/s 写：81000次/s 原子性：redis所有操作都是原子性的。 支持持久化，主从复制。 支持过期时间，支持事物，消息订阅。 memcached 和 redis的区别： memcached仅支持简单的key-value结构数据； redis不仅仅支持简单的k/v类型的数据，同时还提供list，set，hash等数据结构的存储； Memcached不支持数据的备份； redis支持数据的备份，即master-slave模式的数据备份； Memcached不支持数据持久化操作，是全内存的数据缓冲系统； redis支持数据的持久化（采取磁盘存储机制）和数据恢复，可以将内存中的数据保存在磁盘中，重启的时候可以再次加载进行使用，而且提供两种主要的持久化策略：RDB快照和AOF日志； Redis和Memcache都是将数据存放在内存中，都是内存数据库； memcache还可用于缓存其他东西，例如图片、视频等等； 应用场景不一样：memcached适合于缓存SQL语句、数据集、用户临时性数据、延迟查询数据和session等； redis出来作为NoSQL数据库使用外，还能用做消息队列、数据堆栈和数据缓存等； memcached是高性能分布式内存缓存服务；redis是一个开源的key-value存储系统，Nosql数据库； memcached需要将数据拿到客户端进行修改再set到服务端；redis支持服务器端的数据操作； memcached可以使用多核，redis只使用单核；在存储小数据时，平均每一个核上redis比memcached性能更高；在100k以上的数据时，memcached性能要高于Redis memcached本身并不支持分布式，因此只能在客户端通过一致性哈希这样的分布式算法来实现Memcached的分布式存储（集群模式）；redis（最新版本）支持分布式存储功能（集群模式）； memcache在并发场景下，用cas保证数据一致性；redis事务支持比较弱，只能保证事务中的每个操作连续执行；]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>redis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[systemctl 管理 redis]]></title>
+    <url>%2F2021%2F01%2F04%2Fsystemctl-redis%2F</url>
+    <content type="text"><![CDATA[创建服务用service来管理服务的时候，是在/etc/init.d/目录中创建一个脚本文件，来管理服务的启动和停止。在systemctl中，也类似，文件目录有所不同，在/lib/systemd/system目录下创建一个脚本文件redis.service，里面的内容如下： 12345678910[Unit]Description=RedisAfter=network.target[Service]ExecStart=/usr/bin/redis-server /etc/redis.conf --daemonize noExecStop=/usr/bin/redis-cli -h 127.0.0.1 -p 6379 shutdown[Install]WantedBy=multi-user.target [Unit] 表示这是基础信息Description 是描述After 是在那个服务后面启动，一般是网络服务启动后启动 [Service] 表示这里是服务信息ExecStart 是启动服务的命令ExecStop 是停止服务的指令 [Install] 表示这是是安装相关信息WantedBy 是以哪种方式启动：multi-user.target表明当系统以多用户方式（默认的运行级别）启动时，这个服务需要被自动运行。 创建软链接创建软链接是为了下一步系统初始化时自动启动服务 1ln -s /lib/systemd/system/redis.service /etc/systemd/system/multi-user.target.wants/redis.service 创建软链接就好比Windows下的快捷方式ln -s 是创建软链接ln -s 原文件 目标文件（快捷方式的决定地址） 如果创建软连接的时候出现异常，不要担心，看看/etc/systemd/system/multi-user.target.wants/ 目录是否正常创建软链接为准，有时候报错只是提示一下，其实成功了。 123456$ ll /etc/systemd/system/multi-user.target.wants/total 8drwxr-xr-x 2 root root 4096 Mar 30 15:46 ./drwxr-xr-x 13 root root 4096 Mar 13 14:18 ../lrwxrwxrwx 1 root root 31 Nov 23 14:43 redis.service -&gt; /lib/systemd/system/redis.service...略... ps: 有时候/lib/systemd/system/redis.service已经存在，只需要创建软链接即可，而且执行systemctl enable redis时可以自动创建软链接。 刷新配置刚刚配置的服务需要让systemctl能识别，就必须刷新配置 1$ systemctl daemon-reload 如果没有权限可以使用sudo 1$ sudo systemctl daemon-reload 启动、重启、停止启动redis 1$ systemctl start redis 重启redis 1$ systemctl restart redis 停止redis 1$ systemctl stop redis 开机自启动redis服务加入开机启动 1$ systemctl enable redis 禁止开机启动 1$ systemctl disable redis 查看状态查看状态 1$ systemctl status redis]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>redis</tag>
       </tags>
   </entry>
   <entry>
@@ -296,8 +362,8 @@
         <category>Linux</category>
       </categories>
       <tags>
-        <tag>nginx</tag>
         <tag>network</tag>
+        <tag>nginx</tag>
         <tag>https</tag>
       </tags>
   </entry>
@@ -662,8 +728,8 @@
         <category>工具</category>
       </categories>
       <tags>
-        <tag>google</tag>
         <tag>hexo</tag>
+        <tag>google</tag>
       </tags>
   </entry>
   <entry>
