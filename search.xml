@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Swoole 的运行模式]]></title>
+    <url>%2F2022%2F05%2F04%2Fphp-swoole-server%2F</url>
+    <content type="text"><![CDATA[什么是swooleSwoole 是 php 的一个扩展，但是他又不是普通的扩展，其最明显的特点就是：一但运行后就会接管PHP的控制权，进入事件循环。 当某种IO事件发生时， Swoole 会回调开发者设置的指定PHP函数。 也就是说 SwooleServer 更像是一个用 C 语言封装好的一个 Tcp/Udp 支持 多线程， EventLoop，事件驱动，异步 等功能的框架。开发者不需要关心底层的各种实现，直接的在业务层面进行开发即可。 IO事件其实IO我们经常提起如： 磁盘IO ，网络IO 在这里Swoole所指的IO事件实际上是指 网络IO 事件。 在日常生活中你留下了一个邮箱，当有人给你发送邮件的时候，你就会收到邮件提醒；而对于你而言，你并不关心邮件是如何送达的，你只关心你有没有收到邮件，当你收到邮件之后会根据邮件的内容和发送人去做各种各样的处理。在这个比喻中，Swoole就承担了底层网络事件的监听及各种底层事件处理，当收到邮件(请求)时，会触发收件(接收)提醒，然后将控制权转交给你(预先注册的事件回调函数)，来进行后续的处理。 Swoole 的运行流程初始化1234567891011121314151617181920&lt;?php// new 一个SwoolerServer对象 并指定监听端口 和运行模式 以及Socket类型// 此时的一切一切 都是开发者进行配置的时间，没有任何其他事情发生$server = new Swoole\Server(&apos;0.0.0.0&apos;, 9501, SWOOLE_PROCESS, SWOOLE_SOCK_TCP);// 设置运行参数， 就像你平时做的那样，给$server 对象配置相关的参数$server-&gt;set([ &apos;worker_num&apos; =&gt; 4, // 工作进程数量 &apos;daemonize&apos; =&gt; true, // 是否以守护进程模式运行 &apos;backlog&apos; =&gt; 128, // Listen队列长度]);// 注册事件回调函数// 这里指 当底层Tcp新连接进入事件时 交给Tcp 类的 onConnect 静态方法处理$server-&gt;on(&apos;Connect&apos;, [Tcp::class, &apos;onConnect&apos;]);// 这里指 当收到数据时 交给Tcp 类的 onReceive 静态方法处理$server-&gt;on(&apos;Receive&apos;, [Tcp::class, &apos;onReceive&apos;]);// 这里指 当Tcp客户端连接关闭时 交给Tcp 类的 onClose 静态方法处理$server-&gt;on(&apos;Close&apos;, [Tcp::class, &apos;onClose&apos;]); 在上面的示例当中，实际上Swoole还尚未启动，但是我们已经预先配置了许多必要的配置条件。鉴于有的新人还尚不了解什么叫做 回调函数，在这里我简单的讲解一下: 所谓的回调函数(CallBack) 就好比是张开了夹子的捕鼠器，我们设定当有老鼠踩到捕鼠器的时候，他会关闭夹子然后捉住老鼠，我们放置捕鼠器的时候，捕鼠器并没有真的抓老鼠。这个设定就是回调，他不立刻执行，会在遇到触发条件(事件)时执行，在上面的示例当中我们放置了3个捕鼠器(回调函数)，我们只需要知道他会在特定老鼠(事件)踩到的时候(发生的时候)去执行我们期望的功能就好。 Server Start12// 启动Swole Server 将由 Swoole 接管php运行$server-&gt;start(); 至此Swoole 完全的接管了php的运行，并且监听相应端口并当发生事件时去执行开发者自定义的事件回调。 Swoole 运行流程图 Swoole 进程关系图 上图中我们可以了解，Swoole 会创建一个 Manager 进程专门 管理 Work 和 Task 进程。 而 Work 进程则直接通过 Unix Socket 和 Master 进程通讯。]]></content>
+      <categories>
+        <category>PHP</category>
+      </categories>
+      <tags>
+        <tag>swoole</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[git stash 命令使用方法]]></title>
+    <url>%2F2022%2F04%2F09%2Fgit-stash%2F</url>
+    <content type="text"><![CDATA[背景git stash 命令用于将数据存到缓存，当切换分支的时候，如果有未提交的变更记录，此时系统会阻止你切换分支，可以使用 git stash 将数据暂存。 git stash使用当切换分支的时候，如果有未提交的变更记录，此时系统会阻止你切换分支，解决方法有两种： 一种是先将代码 commit，切换分支修改完毕，再次切换回原分支，利用 amend 命令，取消 commit，版本回退，记录重新回复。 第二种方式：利用 git stash 命令，先将数据存到缓存，切换分支修改完毕，切换原分支，利 git stash apply 命令将缓存数据恢复。 命令用法git stash 保存当前工作进度，会把暂存区和工作区的改动保存起来。执行完这个命令后，在运行git status命令，就会发现当前是一个干净的工作区，没有任何改动。可以使用git stash save &#39;message...&#39;可以添加一些注释 git stash list 显示保存进度的列表。也就意味着，git stash命令可以多次执行。 git stash pop [–index] [stash_id] git stash pop 恢复最新的进度到工作区。git默认会把工作区和暂存区的改动都恢复到工作区。 git stash pop --index 恢复最新的进度到工作区和暂存区。（尝试将原来暂存区的改动还恢复到暂存区） git stash pop stash@{1}恢复指定的进度到工作区。stash_id是通过git stash list命令得到的通过git stash pop命令恢复进度后，会删除当前进度。 git stash apply [–index] [stash_id] 除了不删除恢复的进度之外，其余和git stash pop 命令一样。 git stash drop [stash_id] 删除一个存储的进度。如果不指定stash_id，则默认删除最新的存储进度。 git stash clear 删除所有存储的进度。]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[webhook 自动部署]]></title>
     <url>%2F2022%2F02%2F24%2Fgit-webhook%2F</url>
     <content type="text"><![CDATA[原理 push代码到github的时候，github会监听push动作 然后就会访问github中webhook配置的url,如：https://xxx.com/webhook.php webhook.php中的代码会在服务器中git pull相应的代码到web目录中 配置 如果回调成功了会返回Response 200. webhook.php 脚本实现1234567891011121314151617&lt;?php //git webhook 自动部署脚本 //接收数据 $requestBody = file_get_contents(&quot;php://input&quot;); if (empty($requestBody)) &#123; die(&apos;send fail&apos;); &#125; $content = json_decode($requestBody, true); //数据转换 //若是主分支且提交数大于0 if ($content[&apos;ref&apos;] == &apos;refs/heads/master&apos;) &#123; //PHP函数执行git命令 $res = shell_exec(&apos;cd /root/www/project &amp;&amp; git pull 2&gt;&amp;1); $res_log = &apos;-------------------------&apos;.PHP_EOL; $res_log .= &apos; 在&apos; . date(&apos;Y-m-d H:i:s&apos;) . &apos;向&apos; . $content[&apos;repository&apos;][&apos;name&apos;] . &apos;项目的&apos; . $content[&apos;ref&apos;] . &apos;分支push&apos;.$res; //将每次拉取信息追加写入到日志里 file_put_contents(&quot;git-webhook.txt&quot;, $res_log, FILE_APPEND); &#125; 给回调程序加上执行权限 1chmod 755 webhook.php 各种坑 git pull失败原因 权限问题，nginx是www用户，.git文件是root创建的，www对.git没有访问权限，需要修改.git文件的用户和组。 ssh密钥是root用户创建的，www也没有访问权限，需要切换www用户重新生成ssh密钥。]]></content>
@@ -728,8 +750,8 @@
         <category>工具</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
         <tag>google</tag>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
