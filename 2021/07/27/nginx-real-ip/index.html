@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="李子园">
 <meta property="og:description" content="一、获取用户真实IP地址上代码 12345678910111213141516171819public static function getClientIp()&amp;#123;    if (getenv(&apos;HTTP_CLIENT_IP&apos;)) &amp;#123;        $ip = getenv(&apos;HTTP_CLIENT_IP&apos;);    &amp;#125;    if (getenv(&apos;HTTP_X_R">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-07-27T10:11:47.698Z">
+<meta property="og:updated_time" content="2022-09-03T15:33:55.401Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP获取Nginx反向代理后的真实IP">
 <meta name="twitter:description" content="一、获取用户真实IP地址上代码 12345678910111213141516171819public static function getClientIp()&amp;#123;    if (getenv(&apos;HTTP_CLIENT_IP&apos;)) &amp;#123;        $ip = getenv(&apos;HTTP_CLIENT_IP&apos;);    &amp;#125;    if (getenv(&apos;HTTP_X_R">
@@ -373,7 +373,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="多乐">
       <meta itemprop="description" content="li写东西的地方">
-      <meta itemprop="image" content="https://www.zlf520.com.cn/storage/blog/y393oj0KXtkTTTLsuMPx8ilAyPftCbOr0dZLprdw.png">
+      <meta itemprop="image" content="https://tva1.sinaimg.cn/large/6fb8acfcgy1h5tsptmgtdj209q09qt8y.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -411,13 +411,23 @@
                 
               
 
-              <time title="创建时间：2021-07-27 18:10:45 / 修改时间：18:11:47" itemprop="dateCreated datePublished" datetime="2021-07-27T18:10:45+08:00">2021-07-27</time>
+              <time title="创建时间：2021-07-27 18:10:45" itemprop="dateCreated datePublished" datetime="2021-07-27T18:10:45+08:00">2021-07-27</time>
             </span>
           
 
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2022-09-03 23:33:55" itemprop="dateModified" datetime="2022-09-03T23:33:55+08:00">2022-09-03</time>
+              </span>
             
           
 
@@ -494,12 +504,17 @@
 </li>
 </ol>
 <p><strong>HTTP_CLIENT_IP</strong>: 头是有的，只是未成标准，不一定服务器都实现了。<br><strong>X-Forwarded-For（XFF）</strong>:  是用来识别通过HTTP代理或负载均衡方式连接到Web服务器的客户端最原始的IP地址的HTTP请求头字段, 格式：clientip,proxy1,proxy2<br><strong>REMOTE_ADDR</strong>: 是可靠的， 它是最后一个跟你的服务器握手的IP，可能是用户的代理服务器，也可能是自己的反向代理。</p>
-<h3 id="三、负载均衡和CDN情况"><a href="#三、负载均衡和CDN情况" class="headerlink" title="三、负载均衡和CDN情况"></a>三、负载均衡和CDN情况</h3><h4 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">A[用户访问] --&gt;B(nginx负载均衡服务器)</span><br><span class="line">B --&gt; D[nginx服务器1]</span><br><span class="line">B --&gt; E[nginx服务器2]</span><br><span class="line">B --&gt; F[nginx服务器3]</span><br></pre></td></tr></table></figure>
-
+<h3 id="三、负载均衡和CDN情况"><a href="#三、负载均衡和CDN情况" class="headerlink" title="三、负载均衡和CDN情况"></a>三、负载均衡和CDN情况</h3><h4 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h4><pre class="mermaid">graph TD
+A[用户访问] -->B(nginx负载均衡服务器)
+B --> D[nginx服务器1]
+B --> E[nginx服务器2]
+B --> F[nginx服务器3]</pre>
 <p>生产环境中很多服务器隐藏在负载均衡节点后面，你通过REMOTE_ADDR只能获取到负载均衡节点的ip地址，一般的负载均衡节点会把前端实际的ip地址通过HTTP_CLIENT_IP或者HTTP_X_FORWARDED_FOR这两种http头传递过来。</p>
 <p>后端再去读取这个值就是真实可信的，因为它是负载均衡节点告诉你的而不是客户端。但当你的服务器直接暴露在客户端前面的时候，请不要信任这两种读取方法，只需要读取REMOTE_ADDR就行了</p>
-<h4 id="CDN"><a href="#CDN" class="headerlink" title="CDN"></a>CDN</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">A[客户端 IP:210.32.132.83] --&gt; B(CDN ip:14.215.167.197)</span><br><span class="line">B --&gt;|CDN回源,添加用户IP http_x_forwarded_for:201.32.132.83| C[代理服务器nginx]</span><br><span class="line">C --&gt;|反向代理,添加上一个节点IP,http_x_forwarded_for:201.32.132.83,14.215.167.197| D[服务器Apache]</span><br></pre></td></tr></table></figure>
-
+<h4 id="CDN"><a href="#CDN" class="headerlink" title="CDN"></a>CDN</h4><pre class="mermaid">graph TD
+A[客户端 IP:210.32.132.83] --> B(CDN ip:14.215.167.197)
+B -->|CDN回源,添加用户IP http_x_forwarded_for:201.32.132.83| C[代理服务器nginx]
+C -->|反向代理,添加上一个节点IP,http_x_forwarded_for:201.32.132.83,14.215.167.197| D[服务器Apache]</pre>
 <p>所以对于我们获取用户的IP，应该截取http_x_forwarded_for的第一个有效IP(非unknown)。</p>
 <p>多层代理时，和cdn方式类似。</p>
 <blockquote>
@@ -617,7 +632,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="https://www.zlf520.com.cn/storage/blog/y393oj0KXtkTTTLsuMPx8ilAyPftCbOr0dZLprdw.png" alt="多乐">
+              <img class="site-author-image" itemprop="image" src="https://tva1.sinaimg.cn/large/6fb8acfcgy1h5tsptmgtdj209q09qt8y.jpg" alt="多乐">
             
               <p class="site-author-name" itemprop="name">多乐</p>
               <div class="site-description motion-element" itemprop="description">li写东西的地方</div>
@@ -872,7 +887,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love" id="animate">
     <i class="fa fa-heart"></i>
   </span>
@@ -1378,6 +1393,26 @@
   
 
   
+<script>
+if ($('body').find('pre.mermaid').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      mermaid.initialize({
+        theme: 'forest',
+        logLevel: 3,
+        flowchart: { curve: 'linear' },
+        gantt: { axisFormat: '%m/%d/%Y' },
+        sequence: { actorMargin: 50 }
+      });
+    }
+  });
+}
+</script>
+
 
   
   <script>

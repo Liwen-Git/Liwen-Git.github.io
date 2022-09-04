@@ -373,7 +373,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="多乐">
       <meta itemprop="description" content="li写东西的地方">
-      <meta itemprop="image" content="https://www.zlf520.com.cn/storage/blog/y393oj0KXtkTTTLsuMPx8ilAyPftCbOr0dZLprdw.png">
+      <meta itemprop="image" content="https://tva1.sinaimg.cn/large/6fb8acfcgy1h5tsptmgtdj209q09qt8y.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -638,7 +638,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="https://www.zlf520.com.cn/storage/blog/y393oj0KXtkTTTLsuMPx8ilAyPftCbOr0dZLprdw.png" alt="多乐">
+              <img class="site-author-image" itemprop="image" src="https://tva1.sinaimg.cn/large/6fb8acfcgy1h5tsptmgtdj209q09qt8y.jpg" alt="多乐">
             
               <p class="site-author-name" itemprop="name">多乐</p>
               <div class="site-description motion-element" itemprop="description">li写东西的地方</div>
@@ -893,7 +893,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love" id="animate">
     <i class="fa fa-heart"></i>
   </span>
@@ -1399,6 +1399,26 @@
   
 
   
+<script>
+if ($('body').find('pre.mermaid').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      mermaid.initialize({
+        theme: 'forest',
+        logLevel: 3,
+        flowchart: { curve: 'linear' },
+        gantt: { axisFormat: '%m/%d/%Y' },
+        sequence: { actorMargin: 50 }
+      });
+    }
+  });
+}
+</script>
+
 
   
   <script>
